@@ -13,14 +13,22 @@ import * as bcrypt from 'bcrypt';
 import { Role } from './entities/role.entity';
 import { Rol } from 'src/common/roles.enum';
 import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class UsersService {
   constructor(
+    @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
+    @InjectRepository(Role)
     private readonly rolesRepository: Repository<Role>,
     private readonly jwtService: JwtService,
     private readonly dataSource: DataSource,
   ) {}
+
+  async getUsers() {
+    return await this.usersRepository.find();
+  }
+
   async HashPassword(password: string) {
     const hashedPassword: string = await bcrypt.hash(password, 10);
     if (!hashedPassword) {
@@ -28,6 +36,7 @@ export class UsersService {
     }
     return hashedPassword;
   }
+
   async signUp(user: CreateUserDto) {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.startTransaction();
@@ -36,7 +45,7 @@ export class UsersService {
       const userDb = await queryRunner.manager.findOne(User, {
         where: { email: user?.email },
       });
-      if (!userDb) {
+      if (userDb) {
         throw new BadRequestException('Email already in use.');
       }
       if (user.password !== user.confirmPassword) {
@@ -57,6 +66,7 @@ export class UsersService {
       });
       await queryRunner.manager.save(newUser);
       await queryRunner.commitTransaction();
+      return { message: 'User created successfully.' };
     } catch (error) {
       await queryRunner.rollbackTransaction();
       throw new BadRequestException(error.message || 'Inesperated error');
@@ -64,6 +74,7 @@ export class UsersService {
       await queryRunner.release();
     }
   }
+
   async signIn(credentials: LoginUserDto) {
     try {
       const user = await this.usersRepository.findOne({
@@ -75,8 +86,8 @@ export class UsersService {
       }
 
       const isPasswordCorrect = await bcrypt.compare(
-        user.password,
         credentials.password,
+        user.password,
       );
 
       if (!isPasswordCorrect) {

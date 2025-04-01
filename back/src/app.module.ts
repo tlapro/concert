@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { TicketsModule } from './tickets/tickets.module';
 import { JwtModule } from '@nestjs/jwt';
+import { PurchaseModule } from './purchares/purchase.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,6 +21,7 @@ import { JwtModule } from '@nestjs/jwt';
     UsersModule,
     AuthModule,
     TicketsModule,
+    PurchaseModule,
     JwtModule.register({
       global: true,
       signOptions: { expiresIn: '1h' },
