@@ -4,9 +4,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Role } from './role.entity';
+import { Purchase } from 'src/purchares/entities/purchares.entity';
 
 @Entity({
   name: 'users',
@@ -33,9 +35,12 @@ export class User {
   @Column({ default: 'https://i.imgur.com/fEtaWXr.png' })
   imgUser: string;
 
+  @OneToMany(() => Purchase, (purchase) => purchase.user)
+  purchases: Purchase[];
+
   @ManyToOne(() => Role)
   @JoinColumn({ name: 'role_id' })
-  roles: Role;
+  role: Role;
 
   @Column({ default: true })
   isActive: boolean;

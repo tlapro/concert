@@ -1,5 +1,8 @@
 import { registerAs } from '@nestjs/config';
 import { config as dotenvConfig } from 'dotenv';
+import { PurchaseTicket } from 'src/purchares/entities/purchares-tickets.entity';
+import { Purchase } from 'src/purchares/entities/purchares.entity';
+import { Ticket } from 'src/tickets/entities/tickets.entity';
 import { Role } from 'src/users/entities/role.entity';
 import { User } from 'src/users/entities/users.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
@@ -17,7 +20,7 @@ const config = {
   synchronize: true,
   logging: ['errors'],
   //   dropSchema: true,
-  entities: [User, Role],
+  entities: [User, Role, Ticket, Purchase, PurchaseTicket],
 };
 
 export default registerAs('typeorm', () => config);
