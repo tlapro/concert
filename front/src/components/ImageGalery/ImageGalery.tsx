@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -43,7 +44,8 @@ export default function ImageGalery() {
 
   return (
     <div>
-      <div className="grid grid-cols-3 md:grid-cols-5 gap-4 w-[80%] mx-auto">
+      <h1 className="text-center font-bold text-4xl p-4 border-b-4 border-neutral-900 w-[10%] mx-auto mb-10">Galería</h1>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-[50%] mx-auto">
         {images.map((src, index) => (
           <div
             key={index}

@@ -44,7 +44,7 @@ export const lineUpDay1 = {
     },
   ],
 };
-export const LineUpDay2 = {
+export const lineUpDay2 = {
   day: "2",
   scenary: "Escenario 2",
   artists: [
