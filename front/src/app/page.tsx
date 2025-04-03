@@ -1,3 +1,4 @@
+import ImageGalery from "@/components/ImageGalery/ImageGalery";
 import LineUpCard from "@/components/LineUpCard/LineUpCard";
 import {
   lineUpDay1,
@@ -16,7 +17,7 @@ export default function Home() {
       <div className="relative w-full h-[600px] overflow-hidden">
         <video
           className="w-full h-full object-cover object-center"
-          src="https://edm-festival-musica.netlify.app//video/concierto.mp4" 
+          src="https://cdn.pixabay.com/video/2015/12/11/1630-148614385_large.mp4" 
           autoPlay
           loop
           muted
@@ -119,6 +120,9 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+      <section id="galeria">
+              <ImageGalery />
       </section>
     </div>
   );
