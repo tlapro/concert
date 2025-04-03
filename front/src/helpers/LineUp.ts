@@ -62,7 +62,7 @@ export const LineUpDay2 = {
       time: "22:30",
       scenery: "Rock Nacional",
       day: 2,
-      color: ""
+      color: "violet-500"
     },
     {
       id: 3,
@@ -78,7 +78,7 @@ export const LineUpDay2 = {
       time: "00:00",
       scenery: "Rock Nacional",
       day: 2,
-      color: ""
+      color: "violet-500"
     },
     {
       id: 5,
@@ -108,7 +108,7 @@ export const lineUpDay3 = {
       time: "19:45",
       scenery: "Rock Nacional",
       day: 3,
-      color: "",
+      color: "violet-500"
     },
     {
       id: 3,
@@ -124,7 +124,7 @@ export const lineUpDay3 = {
       time: "22:15",
       scenery: "Rock Nacional",
       day: 3,
-      color: "",
+      color: "violet-500"
     },
     {
       id: 5,
@@ -156,7 +156,7 @@ export const lineUpDay4 = {
       time: "19:45",
       scenery: "Rock Nacional",
       day: 4,
-      color: "",
+      color: "orange-400",
     },
     {
       id: 3,
@@ -172,7 +172,7 @@ export const lineUpDay4 = {
       time: "22:15",
       scenery: "Rock Nacional",
       day: 4,
-      color: "",
+      color: "orange-400",
     },
     {
       id: 5,

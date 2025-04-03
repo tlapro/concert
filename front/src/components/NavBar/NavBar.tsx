@@ -1,36 +1,30 @@
-import Link from "next/link";
-
+"use client"
 export default function NavBar() {
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div>
-      <nav>
+      <nav className="fixed top-0 left-0 w-full z-50">
         <div className="flex w-full bg-neutral-900 items-center justify-between h-16">
           <div className="ml-10 text-xl font-bold">Concierto</div>
           <div className="flex gap-10 mr-20">
-            <Link
-              href="#"
-              className="text-xl hover:text-orange-400 hover:text-shadow-[0_0_3px_##FFA500] transition duration-300 ease"
-            >
+            <button onClick={() => scrollToSection("inicio")} className="text-xl cursor-pointer hover:text-orange-400 transition duration-300 ease">
               Inicio
-            </Link>
-            <Link
-              href="#"
-              className="text-xl hover:text-orange-400 hover:text-shadow-[0_0_3px_##FFA500] transition duration-300 ease"
-            >
+            </button>
+            <button onClick={() => scrollToSection("lineup")} className="text-xl cursor-pointer hover:text-orange-400 transition duration-300 ease">
               Line Up
-            </Link>
-            <Link
-              href="#"
-              className="text-xl hover:text-orange-400 hover:text-shadow-[0_0_3px_##FFA500] transition duration-300 ease"
-            >
+            </button>
+            <button onClick={() => scrollToSection("galeria")} className="text-xl cursor-pointer hover:text-orange-400 transition duration-300 ease">
               Galería
-            </Link>
-            <Link
-              href="#"
-              className="text-xl hover:text-orange-400 hover:text-shadow-[0_0_3px_##FFA500] transition duration-300 ease"
-            >
+            </button>
+            <button onClick={() => scrollToSection("entradas")} className="text-xl cursor-pointer hover:text-orange-400 transition duration-300 ease">
               Entradas
-            </Link>
+            </button>
           </div>
         </div>
       </nav>

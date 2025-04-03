@@ -1,15 +1,22 @@
 import LineUpCard from "@/components/LineUpCard/LineUpCard";
-import { lineUpDay1, LineUpDay2, lineUpDay3, lineUpDay4 } from "@/helpers/LineUp";
+import {
+  lineUpDay1,
+  LineUpDay2,
+  lineUpDay3,
+  lineUpDay4,
+} from "@/helpers/LineUp";
 import Image from "next/image";
 
 export default function Home() {
   return (
+    
     <div>
       {/* Video */}
+      <section id="inicio" className="scroll-mt-16">
       <div className="relative w-full h-[600px] overflow-hidden">
         <video
           className="w-full h-full object-cover object-center"
-          src="https://edm-festival-musica.netlify.app//video/concierto.mp4" // Reemplaza con el link de tu video
+          src="https://edm-festival-musica.netlify.app//video/concierto.mp4" 
           autoPlay
           loop
           muted
@@ -46,71 +53,73 @@ export default function Home() {
           </p>
         </div>
       </div>
-      <div className="bg-neutral-950">
-        <div className="grid grid-cols-1 md:grid-cols-2 w-[50%] mx-auto justify-center gap-10">
-          <div className="bg-orange-400 w-[100%] mx-auto min-h-96 mt-10 mb-10">
-            <div className="flex flex-col w-[100%] items-center p-4">
-              <h1 className="text-xl font-bold">Dia {lineUpDay1.day}</h1>
-              <h2 className="text-lg italic">{LineUpDay2.scenary}</h2>
+      </section>
+      <section id="lineup" className="scroll-mt-16">
+        <div className="bg-neutral-950">
+          <div className="grid grid-cols-1 md:grid-cols-2 w-[50%] mx-auto justify-center gap-10">
+            <div className="bg-orange-400 w-[100%] mx-auto min-h-96 mt-10 mb-10">
+              <div className="flex flex-col w-[100%] items-center p-4">
+                <h1 className="text-xl font-bold">Dia {lineUpDay1.day}</h1>
+                <h2 className="text-lg italic">{lineUpDay1.scenary}</h2>
+              </div>
+              {lineUpDay1.artists.map((artista) => (
+                <LineUpCard
+                  key={artista.id}
+                  name={artista.name}
+                  scenery={artista.scenery}
+                  time={artista.time}
+                  color={artista.color}
+                />
+              ))}
             </div>
-            {lineUpDay1.artists.map((artista) => (
-              <LineUpCard
-                key={artista.id}
-                name={artista.name}
-                scenery={artista.scenery}
-                time={artista.time}
-                color={artista.color}
-              />
-            ))}
-          </div>
-          <div className="bg-violet-500 w-[100%] mx-auto min-h-96 mt-10 mb-10">
-            <div className="flex flex-col w-[100%] items-center p-4">
-            <h1 className="text-xl font-bold">Dia {lineUpDay1.day}</h1>
-            <h2 className="text-lg italic">{LineUpDay2.scenary}</h2>
+            <div className="bg-violet-500 w-[100%] mx-auto min-h-96 mt-10 mb-10">
+              <div className="flex flex-col w-[100%] items-center p-4">
+                <h1 className="text-xl font-bold">Dia {LineUpDay2.day}</h1>
+                <h2 className="text-lg italic">{LineUpDay2.scenary}</h2>
+              </div>
+              {LineUpDay2.artists.map((artista) => (
+                <LineUpCard
+                  key={artista.id}
+                  name={artista.name}
+                  scenery={artista.scenery}
+                  time={artista.time}
+                  color={artista.color}
+                />
+              ))}
             </div>
-            {LineUpDay2.artists.map((artista) => (
-              <LineUpCard
-                key={artista.id}
-                name={artista.name}
-                scenery={artista.scenery}
-                time={artista.time}
-                color={artista.color}
-              />
-            ))}
-          </div>
-          <div className="bg-violet-500 w-[100%] mx-auto min-h-96 mb-10">
-            <div className="flex flex-col w-[100%] items-center p-4">
-            <h1 className="text-xl font-bold">Dia {lineUpDay3.day}</h1>
-            <h2 className="text-lg italic">{lineUpDay3.scenary}</h2>
+            <div className="bg-violet-500 w-[100%] mx-auto min-h-96 mb-10">
+              <div className="flex flex-col w-[100%] items-center p-4">
+                <h1 className="text-xl font-bold">Dia {lineUpDay3.day}</h1>
+                <h2 className="text-lg italic">{lineUpDay3.scenary}</h2>
+              </div>
+              {lineUpDay3.artists.map((artista) => (
+                <LineUpCard
+                  key={artista.id}
+                  name={artista.name}
+                  scenery={artista.scenery}
+                  time={artista.time}
+                  color={artista.color}
+                />
+              ))}
             </div>
-            {lineUpDay3.artists.map((artista) => (
-              <LineUpCard
-                key={artista.id}
-                name={artista.name}
-                scenery={artista.scenery}
-                time={artista.time}
-                color={artista.color}
-              />
-            ))}
-          </div>
-          <div className="bg-orange-400 w-[100%] mx-auto min-h-96 mb-10">
-            <div className="flex flex-col w-[100%] items-center p-4">
-            <h1 className="text-xl font-bold">Dia {lineUpDay4.day}</h1>
-            <h2 className="text-lg italic">{lineUpDay4.scenary}</h2>
+            <div className="bg-orange-400 w-[100%] mx-auto min-h-96 mb-10">
+              <div className="flex flex-col w-[100%] items-center p-4">
+                <h1 className="text-xl font-bold">Dia {lineUpDay4.day}</h1>
+                <h2 className="text-lg italic">{lineUpDay4.scenary}</h2>
+              </div>
+              {lineUpDay4.artists.map((artista) => (
+                <LineUpCard
+                  key={artista.id}
+                  name={artista.name}
+                  scenery={artista.scenery}
+                  time={artista.time}
+                  color={artista.color}
+                />
+              ))}
             </div>
-            {lineUpDay4.artists.map((artista) => (
-              <LineUpCard
-                key={artista.id}
-                name={artista.name}
-                scenery={artista.scenery}
-                time={artista.time}
-                color={artista.color}
-              />
-            ))}
           </div>
-          
         </div>
-      </div>
+      </section>
     </div>
   );
 }
