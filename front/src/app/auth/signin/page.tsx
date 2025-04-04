@@ -1,9 +1,13 @@
 "use client";
 
+import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function SignInPage() {
+const { login, user } = useAuth(); 
+    console.log(user)
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,13 +21,15 @@ export default function SignInPage() {
       [name]: value,
     }));
   };
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!formData.email || !formData.password) {
       alert("Completar datos");
       return;
     }
-    console.log(formData);
+    const response = await login(formData);
+    console.log(response)
+
   };
   return (
     <div className="w-full h-full flex justify-center items-center">
