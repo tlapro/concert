@@ -38,9 +38,9 @@ export default function Home() {
           />
           <div className="mt-6 flex flex-col justify-start ml-10 gap-10 w-[80%]">
             <h1 className="text-left font-bold text-5xl">
-              Rock Nacional | Festival
+              Rock Nacional <span className="text-orange-500">&</span> Festival
             </h1>
-            <h2 className="text-left text-2xl text-orange-400 ">
+            <h2 className="text-left text-2xl text-orange-500 ">
               Abril 2025, Buenos Aires, Argentina
             </h2>
             <p className="text-xl text-justify">
