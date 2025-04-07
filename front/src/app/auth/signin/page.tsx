@@ -2,11 +2,13 @@
 
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function SignInPage() {
-const { login, user } = useAuth(); 
-    console.log(user)
+  const { login } = useAuth();
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -24,13 +26,22 @@ const { login, user } = useAuth();
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!formData.email || !formData.password) {
-      alert("Completar datos");
+      toast.error("Completa todos los campos.");
       return;
     }
-    const response = await login(formData);
-    console.log(response)
 
+    const result = await login(formData);
+    if (!result) return;
+    
+    if (result.success) {
+      toast.success(result.message);
+      router.push("/");
+    } else {
+      toast.error(result.message);
+    }
+    
   };
+
   return (
     <div className="w-full h-full flex justify-center items-center">
       <form
@@ -72,7 +83,7 @@ const { login, user } = useAuth();
             <p className="text-sm">
               ¿No tienes una cuenta?{" "}
               <Link
-                href={"/auth/singup"}
+                href={"/auth/signup"}
                 className="text-orange-400 hover:text-orange-500 transition duration-200 ease"
               >
                 Registrate
