@@ -8,12 +8,13 @@ import toast from "react-hot-toast";
 
 
 export default function SignUp() {
-  const { login } = useAuth();
+  const { register } = useAuth();
   const router = useRouter();
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    birthdate: "",
     password: "",
     confirmPassword: "",
     phone: "",
@@ -31,18 +32,19 @@ export default function SignUp() {
   };
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!formData.email || !formData.password) {
-      toast.error("Completa todos los campos.");
-      return;
-    }
 
-
-    const result = await login(formData);
+    const parsedData = {
+      ...formData,
+      birthdate: new Date(formData.birthdate).toISOString().split("T")[0],
+    };
+    
+    console.log(parsedData)
+    const result = await register(parsedData);
     if (!result) return;
 
     if (result.success) {
       toast.success(result.message);
-      router.push("/");
+      router.push("/auth/signin");
     } else {
       toast.error(result.message);
     }
@@ -117,7 +119,7 @@ export default function SignUp() {
                 name="birthdate"
                 className="w-[65%] mx-auto bg-black text-white focus:outline-0 rounded-md p-1"
                 max={new Date().toISOString().split("T")[0]} 
-                onChange={(e) => setBirthdate(new Date(e.target.value))}
+                onChange={handleChange}
               />
             </div>
 

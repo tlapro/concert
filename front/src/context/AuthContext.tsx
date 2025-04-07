@@ -8,11 +8,13 @@ import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { toast } from 'react-hot-toast';
+import { IRegisterUser } from "@/interfaces/IRegisterUser";
 
 interface AuthContextType {
   user: IUser | null;
   token: string | null;
   login: (credentials: ICredentials) => Promise<{ success: boolean, message: string } | undefined>;
+  register: (form: IRegisterUser) => Promise<{ success: boolean, message: string } | undefined>;
   logout: () => void;
 }
 
@@ -88,6 +90,30 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
     
   };
+  const register = async (form: IRegisterUser): Promise<{ success: boolean, message: string } | undefined> => {
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`,
+        form
+      );
+      console.log(response)
+      return { success: true, message: `¡Registro exitoso!` };
+
+    } catch (error: any) {
+      const errMsg = error?.response?.data?.message;
+    
+      const translatedErrors: Record<string, string> = {
+        "Email already in use.": "El email ya se encuentra registrado",
+        "Passwords does not match": "Las contraseñas no coinciden",
+        "Role not found": "Error inesperado al registrar el usuario",
+        "Inesperated error": "Error inesperado al registrar el usuario",
+      };
+    
+      const message = translatedErrors[errMsg] || "Error al registrar el usuario";
+      return { success: false, message};
+    }
+    
+  };
   
 
   const logout = () => {
@@ -98,7 +124,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
