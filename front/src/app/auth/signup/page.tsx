@@ -5,17 +5,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { TextField } from "@mui/material";
-import { es } from "date-fns/locale";
+
 
 export default function SignUp() {
   const { login } = useAuth();
   const router = useRouter();
 
-  const [birthdate, setBirthdate] = useState<Date | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,17 +31,13 @@ export default function SignUp() {
   };
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!formData.email || !formData.password || !birthdate) {
+    if (!formData.email || !formData.password) {
       toast.error("Completa todos los campos.");
       return;
     }
 
-    const completeForm = {
-      ...formData,
-      birthdate: birthdate.toISOString(),
-    };
 
-    const result = await login(completeForm);
+    const result = await login(formData);
     if (!result) return;
 
     if (result.success) {
@@ -78,7 +69,7 @@ export default function SignUp() {
                 placeholder="Nombre completo"
               />
             </div>
-            <div className="flex flex-col text-center gap-2">
+            <div className="flex flex-col text-center gap-2 mt-2">
               <label htmlFor="email" className="text-xl">
                 Email
               </label>
