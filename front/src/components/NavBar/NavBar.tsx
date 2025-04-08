@@ -1,9 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { CiLogout } from "react-icons/ci";
+import { useAuth } from "@/context/AuthContext";
+import Link from "next/link";
 
 export default function NavBar() {
   const router = useRouter();
+  const { user, logout } = useAuth();
 
   const scrollOrNavigate = (id: string) => {
     const isHome = window.location.pathname === "/";
@@ -27,7 +31,7 @@ export default function NavBar() {
               ARGENTINA <span className="text-orange-500">ROCK</span>
             </h1>
           </div>
-          <div className="flex gap-10 mr-20">
+          <div className="flex gap-10 mr-2">
             <button
               onClick={() => scrollOrNavigate("inicio")}
               className="text-xl cursor-pointer hover:text-orange-400 transition duration-300 ease"
@@ -52,6 +56,29 @@ export default function NavBar() {
             >
               Entradas
             </button>
+            {user ? (
+              <button
+                className="text-xl cursor-pointer hover:text-orange-400 transition duration-300 ease"
+                onClick={() => logout()}
+              >
+                <CiLogout size={25} />
+              </button>
+            ) : (
+              <div className="flex justify-between items-center">
+                <Link
+                  href={"/auth/signin"}
+                  className="text-sm cursor-pointer hover:text-orange-400 transition duration-300 ease"
+                >
+                  Iniciar Sesión
+                </Link>
+                <Link
+                  href={"/auth/signup"}
+                  className="text-sm ml-6 cursor-pointer p-2 bg-orange-400 hover:bg-orange-500 rounded-xl transition duration-300 ease"
+                >
+                  Registrarse
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </nav>

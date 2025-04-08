@@ -7,7 +7,6 @@ import { IUser } from "@/interfaces/IUser";
 import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
-import { toast } from 'react-hot-toast';
 import { IRegisterUser } from "@/interfaces/IRegisterUser";
 
 interface AuthContextType {

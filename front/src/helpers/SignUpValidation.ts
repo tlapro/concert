@@ -51,6 +51,28 @@ export const registerValidate = (fieldName: string, value: string, form: any) =>
       error = "El teléfono debe contener solo números.";
     }
   }
+  if (fieldName === "birthdate") {
+    if (!value) {
+      error = "La fecha de nacimiento es obligatoria.";
+    } else {
+      const birthDate = new Date(value);
+      const today = new Date();
+      const age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      const dayDiff = today.getDate() - birthDate.getDate();
+
+      const isBeforeBirthday =
+        monthDiff < 0 || (monthDiff === 0 && dayDiff < 0);
+
+      const finalAge = isBeforeBirthday ? age - 1 : age;
+
+      if (isNaN(birthDate.getTime())) {
+        error = "La fecha de nacimiento no es válida.";
+      } else if (finalAge < 16) {
+        error = "Debes tener al menos 16 años.";
+      }
+    }
+  }
 
   return error;
 };

@@ -21,7 +21,6 @@ export default function Home() {
   }, []);
   return (
     <div>
-      {/* Video */}
       <section id="inicio" className="scroll-mt-16">
         <div className="relative w-full h-[600px] overflow-hidden">
           <video

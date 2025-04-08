@@ -57,7 +57,7 @@ export default function SignInPage() {
             </label>
             <input
               name="email"
-              className="w-full bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-500 text-center"
+              className="w-full bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400 text-center"
               onChange={handleChange}
               type="email"
               placeholder="email@example.com"
@@ -69,7 +69,7 @@ export default function SignInPage() {
             </label>
             <input
               name="password"
-              className="w-full bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-500 text-center"
+              className="w-full bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400 text-center"
               onChange={handleChange}
               type="password"
               placeholder="*********"
@@ -78,7 +78,7 @@ export default function SignInPage() {
           <div className="flex flex-col justify-center items-center gap-8">
             <button
               type="submit"
-              className="bg-orange-500 p-2 rounded-md cursor-pointer"
+              className="bg-orange-400 p-2 rounded-md cursor-pointer"
             >
               Iniciar Sesión
             </button>
