@@ -57,9 +57,10 @@ export default function SignInPage() {
             </label>
             <input
               name="email"
-              className="bg-black focus:outline-0 rounded-md p-1"
+              className="w-full bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-500 text-center"
               onChange={handleChange}
               type="email"
+              placeholder="email@example.com"
             />
           </div>
           <div className="flex flex-col text-center gap-4">
@@ -68,9 +69,10 @@ export default function SignInPage() {
             </label>
             <input
               name="password"
-              className="bg-black focus:outline-0 rounded-md p-1"
+              className="w-full bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-500 text-center"
               onChange={handleChange}
               type="password"
+              placeholder="*********"
             />
           </div>
           <div className="flex flex-col justify-center items-center gap-8">

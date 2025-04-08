@@ -5,6 +5,4 @@ export interface IRegisterUser {
     confirmPassword: string,
     birthdate: string,
     phone: string,
-    city: string,
-    country: string,
 }
