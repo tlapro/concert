@@ -4,6 +4,7 @@ import { PurchaseTicket } from 'src/purchares/entities/purchares-tickets.entity'
 import { Purchase } from 'src/purchares/entities/purchares.entity';
 import { Ticket } from 'src/tickets/entities/tickets.entity';
 import { Role } from 'src/users/entities/role.entity';
+import { UserTicket } from 'src/users/entities/users-tickets.entity';
 import { User } from 'src/users/entities/users.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
@@ -19,8 +20,8 @@ const config = {
   autoLoadEntities: true,
   synchronize: true,
   logging: ['errors'],
-  //   dropSchema: true,
-  entities: [User, Role, Ticket, Purchase, PurchaseTicket],
+  dropSchema: true,
+  entities: [User, Role, Ticket, Purchase, PurchaseTicket, UserTicket],
 };
 
 export default registerAs('typeorm', () => config);

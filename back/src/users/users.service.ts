@@ -34,6 +34,7 @@ export class UsersService {
       if (!user) {
         throw new BadRequestException('User does not exist.');
       }
+      return user;
     } catch (error) {
       throw new BadRequestException(
         error.message || 'Can not find user by id.',

@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Role } from 'src/users/entities/role.entity';
 
 @Injectable()
-export class SeedsService implements OnModuleInit {
+export class RolesSeeder implements OnModuleInit {
   constructor(
     @InjectRepository(Role)
     private readonly rolesRepository: Repository<Role>,
