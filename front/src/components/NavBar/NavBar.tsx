@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { CiLogout } from "react-icons/ci";
+import { RiLogoutBoxLine } from "react-icons/ri";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 
@@ -60,10 +60,10 @@ export default function NavBar() {
             </button>
             {user ? (
               <button
-                className="text-xl cursor-pointer hover:text-orange-400 transition duration-300 ease"
+                className="flex text-sm items-center justify-center gap-2 cursor-pointer transition duration-300 ease mr-4 bg-orange-400 hover:bg-orange-500 p-2 rounded-xl"
                 onClick={() => logout()}
               >
-                <CiLogout size={25} />
+                Logout <RiLogoutBoxLine size={20} />
               </button>
             ) : (
               <div className="flex justify-between items-center">
