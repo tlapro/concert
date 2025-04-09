@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { useAuth } from "@/context/AuthContext";
 import { getTickets } from "@/helpers/getTickets";
@@ -6,11 +7,15 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IoTicketOutline } from "react-icons/io5";
 import TicketCard from "../TicketCard/TicketCard";
+import { SelectedTicket } from "@/interfaces/ISelectedTicket";
+import { purchaseTickets } from "@/helpers/purchaseTickets";
+import toast from "react-hot-toast";
 
 export default function Tickets() {
   const { user, token } = useAuth();
   const [tickets, setTickets] = useState<ITicket[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedTickets, setSelectedTickets] = useState<SelectedTicket[]>([]);
 
   useEffect(() => {
     const fetchTickets = async () => {
@@ -31,11 +36,29 @@ export default function Tickets() {
     fetchTickets();
   }, [token]);
 
+  const handlePurchase = async () => {
+    if (!user) return;
+    if (!token) return;
+    try {
+      const res = await purchaseTickets({
+        userId: user.id,
+        tickets: selectedTickets,
+        token,
+      });
+      toast.success("Compra realizada con exito");
+    } catch (err) {
+      toast.error("Error al comprar las entradas");
+    }
+  };
+
+  const total = selectedTickets.reduce((acc, selected) => {
+    const ticketInfo = tickets.find((t) => t.id === selected.ticketId);
+    if (!ticketInfo) return acc;
+    return acc + selected.quantity * ticketInfo.price;
+  }, 0);
   if (loading) {
     return (
-      <div className="text-center text-white mt-10">
-        Cargando entradas...
-      </div>
+      <div className="text-center text-white mt-10">Cargando entradas...</div>
     );
   }
 
@@ -65,13 +88,45 @@ export default function Tickets() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-      {tickets.length > 0 ? (
-        tickets.map((ticket) => (
-          <TicketCard key={ticket.id} ticket={ticket} />
-        ))
-      ) : (
-        <p className="text-neutral-300 mt-10">No tenés entradas registradas.</p>
+    <div className="flex flex-col">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+        {tickets.length > 0 ? (
+          tickets.map((ticket) => (
+            <TicketCard
+              key={ticket.id}
+              ticket={ticket}
+              onQuantityChange={(quantity) => {
+                setSelectedTickets((prev) => {
+                  const exists = prev.find((t) => t.ticketId === ticket.id);
+                  if (exists) {
+                    if (quantity === 0) {
+                      return prev.filter((t) => t.ticketId !== ticket.id);
+                    }
+                    return prev.map((t) =>
+                      t.ticketId === ticket.id ? { ...t, quantity } : t
+                    );
+                  } else {
+                    return [...prev, { ticketId: ticket.id, quantity }];
+                  }
+                });
+              }}
+            />
+          ))
+        ) : (
+          <p className="text-neutral-300 mt-10">
+            No tenés entradas registradas.
+          </p>
+        )}
+      </div>
+      {selectedTickets.length > 0 && (
+        <div className="flex flex-col w-[20%] justify-center items-center mx-auto mt-10 text-white text-lg font-semibold text-center">
+          <div>
+          Total a pagar: <span className="text-orange-400">${total}</span>
+          </div>
+          <button onClick={handlePurchase} className="mt-5 px-6 py-3 font-bold rounded-xl bg-orange-400 hover:bg-orange-600 transition duration-300 ease cursor-pointer">
+            Confirmar compra
+          </button>
+        </div>
       )}
     </div>
   );
