@@ -28,7 +28,18 @@ export class UsersService {
   async getUsers() {
     return await this.usersRepository.find();
   }
-
+  async getUserById(id: string) {
+    try {
+      const user = await this.usersRepository.findOne({ where: { id } });
+      if (!user) {
+        throw new BadRequestException('User does not exist.');
+      }
+    } catch (error) {
+      throw new BadRequestException(
+        error.message || 'Can not find user by id.',
+      );
+    }
+  }
   async HashPassword(password: string) {
     const hashedPassword: string = await bcrypt.hash(password, 10);
     if (!hashedPassword) {
