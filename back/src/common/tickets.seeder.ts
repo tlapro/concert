@@ -17,7 +17,7 @@ export class TicketsSeeder implements OnModuleInit {
   private async seedDefaultTickets() {
     const defaultTickets = [
       {
-        type: 'general',
+        type: 'common',
         price: 100,
         event_date: new Date('2025-08-01'),
         state: true,

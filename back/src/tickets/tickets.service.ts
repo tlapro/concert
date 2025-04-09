@@ -9,4 +9,7 @@ export class TicketsService {
     @InjectRepository(Ticket)
     private readonly ticketsRepository: Repository<Ticket>,
   ) {}
+  getTickets() {
+    return this.ticketsRepository.find();
+  }
 }

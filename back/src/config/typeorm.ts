@@ -20,7 +20,7 @@ const config = {
   autoLoadEntities: true,
   synchronize: true,
   logging: ['errors'],
-  dropSchema: true,
+  // dropSchema: true,
   entities: [User, Role, Ticket, Purchase, PurchaseTicket, UserTicket],
 };
 

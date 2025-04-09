@@ -6,6 +6,7 @@ import { PurchaseService } from './purchase.service';
 import { Ticket } from 'src/tickets/entities/tickets.entity';
 import { UserTicket } from 'src/users/entities/users-tickets.entity';
 import { UsersModule } from 'src/users/users.module';
+import { PurchaseController } from './purchase.controller';
 
 @Module({
   imports: [
@@ -13,6 +14,6 @@ import { UsersModule } from 'src/users/users.module';
     UsersModule,
   ],
   providers: [PurchaseService],
-  controllers: [],
+  controllers: [PurchaseController],
 })
 export class PurchaseModule {}

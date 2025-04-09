@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { TicketsModule } from './tickets/tickets.module';
 import { JwtModule } from '@nestjs/jwt';
 import { PurchaseModule } from './purchares/purchase.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({

@@ -14,6 +14,7 @@ import { Role } from './entities/role.entity';
 import { Rol } from 'src/common/roles.enum';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UserTicket } from './entities/users-tickets.entity';
 @Injectable()
 export class UsersService {
   constructor(
@@ -21,12 +22,16 @@ export class UsersService {
     private readonly usersRepository: Repository<User>,
     @InjectRepository(Role)
     private readonly rolesRepository: Repository<Role>,
+    @InjectRepository(UserTicket)
+    private readonly usersTickets: Repository<UserTicket>,
     private readonly jwtService: JwtService,
     private readonly dataSource: DataSource,
   ) {}
 
   async getUsers() {
-    return await this.usersRepository.find();
+    return await this.usersRepository.find({
+      relations: ['role'],
+    });
   }
   async getUserById(id: string) {
     try {
@@ -91,6 +96,7 @@ export class UsersService {
     try {
       const user = await this.usersRepository.findOne({
         where: { email: credentials.email },
+        relations: ['role'],
       });
 
       if (!user) {
@@ -109,7 +115,7 @@ export class UsersService {
         sub: user.id,
         id: user.id,
         email: user.email,
-        rol: user.role,
+        role: user.role.name,
       };
 
       const token = await this.jwtService.signAsync(userPayload);
@@ -128,5 +134,12 @@ export class UsersService {
     } catch (error) {
       throw new BadRequestException(error.message || 'Inesperated error');
     }
+  }
+
+  async getTickets(userId: string) {
+    return this.usersTickets.find({
+      where: { user: { id: userId } },
+      relations: ['ticket', 'purchase'],
+    });
   }
 }
