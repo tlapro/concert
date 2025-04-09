@@ -8,6 +8,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { IRegisterUser } from "@/interfaces/IRegisterUser";
+import { useRouter } from "next/navigation";
 
 interface AuthContextType {
   user: IUser | null;
@@ -23,7 +24,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<IUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  const router = useRouter();
   useEffect(() => {
     const savedToken = Cookies.get("token");
     const savedUser = Cookies.get("user");
@@ -120,6 +121,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     Cookies.remove("user");
     setToken(null);
     setUser(null);
+    router.push("/");
   };
 
   return (
