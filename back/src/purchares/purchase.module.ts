@@ -3,9 +3,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Purchase } from './entities/purchares.entity';
 import { PurchaseTicket } from './entities/purchares-tickets.entity';
 import { PurchaseService } from './purchase.service';
+import { Ticket } from 'src/tickets/entities/tickets.entity';
+import { UserTicket } from 'src/users/entities/users-tickets.entity';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Purchase, PurchaseTicket])],
+  imports: [
+    TypeOrmModule.forFeature([Purchase, PurchaseTicket, UserTicket, Ticket]),
+    UsersModule,
+  ],
   providers: [PurchaseService],
   controllers: [],
 })

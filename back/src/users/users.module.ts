@@ -10,5 +10,6 @@ import { RolesSeeder } from 'src/common/roles.seeder';
   imports: [TypeOrmModule.forFeature([User, Role])],
   providers: [UsersService, RolesSeeder],
   controllers: [UsersController],
+  exports: [UsersService],
 })
 export class UsersModule {}
