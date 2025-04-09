@@ -27,9 +27,11 @@ export default function NavBar() {
       <nav className="fixed top-0 left-0 w-full z-50">
         <div className="flex w-full bg-neutral-900 items-center justify-between h-16">
           <div className="flex ml-10 text-xl font-bold gap-2">
+            <div className="relative">
             <h1>
               ARGENTINA <span className="text-orange-500">ROCK</span>
             </h1>
+            </div>
           </div>
           <div className="flex gap-10 mr-2">
             <button
