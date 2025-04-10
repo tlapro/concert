@@ -3,12 +3,27 @@ import UserTicketCard from "@/components/UserTicketCard/UserTicketCard";
 import { useAuth } from "@/context/AuthContext";
 import { getUserTickets } from "@/helpers/getUserTickets";
 import { IUserTicket } from "@/interfaces/IUserTicket";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Tickets() {
+  const router = useRouter()
   const { token } = useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [tickets, setTickets] = useState<IUserTicket[]>([]);
+
+  const scrollOrNavigate = (id: string) => {
+    const isHome = window.location.pathname === "/";
+
+    if (isHome) {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push(`/#${id}`);
+    }
+  }
 
   useEffect(() => {
     const fetchUserTickets = async () => {
@@ -42,6 +57,15 @@ export default function Tickets() {
         Debes ingresar a tu cuenta para ver tus entradas.
       </div>
     );
+  }
+  if (tickets.length === 0) {
+    return (
+      <div className="flex justify-center items-center text-white mt-20 mb-20 text-lg font-semibold text-center px-4">
+      <p>
+        Todavía no tienes entradas. Puedes adquirirlas <button onClick={() => scrollOrNavigate("entradas")} className="text-orange-400 hover:text-orange-600 transition cursor-pointer">aquí</button>
+        </p>
+      </div>
+    )
   }
 
   const vipTickets = tickets.filter((t) => t.ticket.type === "vip");
