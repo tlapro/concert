@@ -30,7 +30,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const savedUser = Cookies.get("user");
 
     if (savedToken) setToken(savedToken);
-
     if (savedUser) {
       try {
         setUser(JSON.parse(savedUser));
@@ -61,7 +60,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (!response.data || !response.data.token || !response.data.user) {
         return { success: false, message: "Credenciales incorrectas o respuesta inválida del servidor"}
       }
-  
+
       Cookies.set("token", response.data.token, {
         expires: 7,
         sameSite: "Lax",
@@ -75,7 +74,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setToken(response.data.token);
       setUser(response.data.user);
   
-      return { success: true, message: `¡Bienvenido, ${response.data.user.name}!` };
+      return { success: true, message: `¡Bienvenido/a, ${response.data.user.name}!` };
 
     } catch (error: any) {
       const errMsg = error?.response?.data?.message;
@@ -96,10 +95,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`,
         form
       );
-      console.log(response)
       return { success: true, message: `¡Registro exitoso!` };
 
     } catch (error: any) {
+      console.log(error)
       const errMsg = error?.response?.data?.message;
     
       const translatedErrors: Record<string, string> = {

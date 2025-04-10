@@ -10,8 +10,10 @@ import TicketCard from "../TicketCard/TicketCard";
 import { SelectedTicket } from "@/interfaces/ISelectedTicket";
 import { purchaseTickets } from "@/helpers/purchaseTickets";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function Tickets() {
+  const router = useRouter();
   const { user, token } = useAuth();
   const [tickets, setTickets] = useState<ITicket[]>([]);
   const [loading, setLoading] = useState(true);
@@ -46,6 +48,7 @@ export default function Tickets() {
         token,
       });
       toast.success("Compra realizada con exito");
+      router.push("/tickets")
     } catch (err) {
       toast.error("Error al comprar las entradas");
     }

@@ -1,3 +1,5 @@
+
+import { useAuth } from "@/context/AuthContext";
 import { IUserTicket } from "@/interfaces/IUserTicket";
 import { QRCodeCanvas } from "qrcode.react";
 
@@ -7,8 +9,18 @@ interface Props {
 }
 
 export default function UserTicketModal({ ticket, onClose }: Props) {
+  const { user } = useAuth()
+  if (!user) return null;
+  const { name, email, birthdate} = user;
   const { code, used, ticket: eventTicket } = ticket;
-  const qrData = JSON.stringify({ code });
+  
+  const qrData = JSON.stringify({
+    code,
+    name,
+    email,
+    birthdate: new Date(birthdate).toLocaleDateString("es-AR"),
+  });
+  
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 px-4">

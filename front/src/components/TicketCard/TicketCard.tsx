@@ -1,6 +1,7 @@
 "use client";
 import { ITicket } from "@/interfaces/Tickets";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 interface Props {
   ticket: ITicket;
@@ -11,6 +12,10 @@ export default function TicketCard({ ticket, onQuantityChange }: Props) {
   const [quantity, setQuantity] = useState<number>(0);
 
   const handleIncrement = () => {
+    if (quantity === 5) {
+      toast.error("No puedes comprar más de 5 entradas.")
+      return;
+    }
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
     onQuantityChange(newQuantity);

@@ -11,6 +11,8 @@ export const registerValidate = (fieldName: string, value: string, form: any) =>
       error = "El nombre es obligatorio.";
     } else if (!regexName.test(value)) {
       error = "El nombre solo puede contener letras y espacios.";
+    } else if (value.trim().split(" ").length < 2) {
+      error = "Debes ingresar nombre y apellido.";
     }
   }
 
@@ -49,6 +51,8 @@ export const registerValidate = (fieldName: string, value: string, form: any) =>
       error = "El teléfono es obligatorio.";
     } else if (!regexPhone.test(value)) {
       error = "El teléfono debe contener solo números.";
+    } else if (value.length < 10) {
+      error = "El teléfono debe contener al menos 10 caracteres."
     }
   }
   if (fieldName === "birthdate") {

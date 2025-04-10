@@ -5,5 +5,9 @@ export interface IUser {
     birthdate: Date,
     phone: string,
     imgUser: string,
+    role: {
+        id: number,
+        name: string,
+    }
     createdAt: string,
 }

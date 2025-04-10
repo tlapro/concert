@@ -72,30 +72,35 @@ export default function Tickets() {
   const commonTickets = tickets.filter((t) => t.ticket.type === "common");
 
   return (
-    <div className="flex flex-col items-center p-6">
+    <div className="flex flex-col items-center p-6 min-h-screen mt-5">
       {vipTickets.length > 0 && (
         <div className="w-full max-w-5xl mb-8">
+                    <hr className="border-[1px] border-neutral-800 w-full mb-10" />
           <h2 className="text-2xl text-purple-400 font-bold mb-4 text-center">
             Entradas VIP
           </h2>
+          <hr className="border-[1px] border-neutral-800 w-full mt-10 mb-5" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 place-items-center">
             {vipTickets.map((ticket) => (
               <UserTicketCard key={ticket.id} userTicket={ticket} />
             ))}
           </div>
+            <hr className="border-[1px] border-neutral-800 w-full mt-5" />
         </div>
       )}
 
       {commonTickets.length > 0 && (
         <div className="w-full max-w-5xl">
-          <h2 className="text-2xl text-orange-400 font-bold mb-4 text-center">
+          <h2 className="text-2xl text-orange-400 font-bold mb-4 mt-2 text-center">
             Entradas Comunes
           </h2>
+            <hr className="border-[1px] border-neutral-800 w-full mt-10 mb-5" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 place-items-center">
             {commonTickets.map((ticket) => (
               <UserTicketCard key={ticket.id} userTicket={ticket} />
             ))}
           </div>
+          <hr className="border-[1px] border-neutral-800 w-full mt-5" />
         </div>
       )}
     </div>

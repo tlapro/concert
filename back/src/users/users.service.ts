@@ -126,7 +126,6 @@ export class UsersService {
 
       const {
         password: ignoredPassword,
-        role: ignoredRole,
         isActive: ignoredisActive,
         ...userWithoutPassword
       } = user;
@@ -141,6 +140,12 @@ export class UsersService {
     return this.usersTickets.find({
       where: { user: { id: userId } },
       relations: ['ticket', 'purchase'],
+    });
+  }
+
+  async getAllTickets() {
+    return this.usersTickets.find({
+      relations: ['ticket', 'purchase', 'user'],
     });
   }
 

@@ -32,6 +32,14 @@ export class UsersController {
     const userId = req.user.id;
     return this.usersService.getTickets(userId);
   }
+
+  @Get('alltickets')
+  @Roles(Rol.Admin)
+  @UseGuards(AuthGuard, RoleGuard)
+  getAllTickets() {
+    return this.usersService.getAllTickets();
+  }
+
   @Get(':id')
   @Roles(Rol.Admin)
   @UseGuards(AuthGuard, RoleGuard)
