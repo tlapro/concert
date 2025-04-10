@@ -1,3 +1,4 @@
+"use client"
 import { lineUpDay1, lineUpDay2, lineUpDay3, lineUpDay4 } from "@/helpers/LineUp";
 import LineUpCard from "../LineUpCard/LineUpCard";
 

@@ -88,6 +88,7 @@ export default function Tickets() {
   }
 
   return (
+    
     <div className="flex flex-col">
       <div className="flex flex-col md:flex-row justify-center items-center gap-4">
         {tickets.length > 0 ? (

@@ -11,7 +11,7 @@ export default function UserTicketCard({ userTicket }: Props) {
   const qrData = JSON.stringify({ code });
 
   return (
-    <div className="bg-neutral-900 border border-orange-500 rounded-2xl p-6 text-white shadow-lg w-full max-w-md mb-6">
+    <div className="bg-neutral-900 border border-neutral-700 rounded-2xl hover:border-orange-400 cursor-default transition duration-300 ease p-6 text-white shadow-lg w-full mb-6">
       <div className="flex justify-between items-center mb-4">
         <div>
           <h2 className="text-xl font-bold">Entrada #{code.split("-")[1]}</h2>
@@ -19,10 +19,10 @@ export default function UserTicketCard({ userTicket }: Props) {
         </div>
         <span
           className={`px-4 py-1 rounded-full text-sm font-semibold ${
-            ticket.type === "vip" ? "bg-purple-600" : "bg-orange-600"
+            ticket.type === "vip" ? "bg-purple-600" : "bg-orange-400"
           }`}
         >
-          {ticket.type.toUpperCase()}
+          {ticket.type === 'common' ? "COMÚN" : "VIP"}
         </span>
       </div>
 
@@ -45,7 +45,7 @@ export default function UserTicketCard({ userTicket }: Props) {
       </div>
 
       <div className="flex flex-col items-center gap-2 mt-4">
-        <QRCodeCanvas value={qrData} size={132} bgColor="#000000" fgColor="#FFA500" className="border-10 border-black" />
+        <QRCodeCanvas value={qrData} size={132} bgColor="#000000" fgColor="#ffffff" className="border-10 border-black" />
         <p className="text-xs text-neutral-400 mt-1">Mostrá este código para entrar al evento</p>
       </div>
     </div>
