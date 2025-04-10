@@ -1,8 +1,10 @@
 import {
+  Body,
   Controller,
   Get,
   Param,
   ParseUUIDPipe,
+  Put,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -12,6 +14,7 @@ import { Rol } from 'src/common/roles.enum';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { RoleGuard } from 'src/guards/role.guard';
 import { AuthenticatedRequest } from 'src/types/express';
+import { UpdateUserPassword } from './dtos/UpdateUserPassword..dto';
 
 @Controller('users')
 export class UsersController {
@@ -34,5 +37,15 @@ export class UsersController {
   @UseGuards(AuthGuard, RoleGuard)
   getUserById(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.getUserById(id);
+  }
+
+  @Put('change-password')
+  @UseGuards(AuthGuard)
+  changePassword(
+    @Req() req: AuthenticatedRequest,
+    @Body() userUpdatePassword: UpdateUserPassword,
+  ) {
+    const userId = req.user.id;
+    return this.usersService.changePassword(userUpdatePassword, userId);
   }
 }

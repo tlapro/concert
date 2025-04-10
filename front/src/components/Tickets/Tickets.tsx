@@ -66,7 +66,7 @@ export default function Tickets() {
     return (
       <div>
         <div className="flex justify-center items-center">
-          <h1 className="flex text-center font-bold text-4xl p-4 border-b-4 border-neutral-900 w-fit mx-auto mb-10 text-orange-500">
+          <h1 className="flex text-center font-bold text-4xl p-4 border-b-4 border-neutral-900 w-fit mx-auto mb-10">
             <IoTicketOutline size={40} className="mr-5" />
             Entradas
             <IoTicketOutline size={40} className="ml-5 rotate-90" />
@@ -88,8 +88,14 @@ export default function Tickets() {
   }
 
   return (
-    
     <div className="flex flex-col">
+      <div className="flex justify-center items-center">
+        <h1 className="flex text-center font-bold text-4xl p-4 border-b-4 border-neutral-900 w-fit mx-auto mb-10">
+          <IoTicketOutline size={40} className="mr-5" />
+          Entradas
+          <IoTicketOutline size={40} className="ml-5 rotate-90" />
+        </h1>
+      </div>
       <div className="flex flex-col md:flex-row justify-center items-center gap-4">
         {tickets.length > 0 ? (
           tickets.map((ticket) => (
@@ -122,9 +128,12 @@ export default function Tickets() {
       {selectedTickets.length > 0 && (
         <div className="flex flex-col w-[20%] justify-center items-center mx-auto mt-10 text-white text-lg font-semibold text-center">
           <div>
-          Total a pagar: <span className="text-orange-400">${total}</span>
+            Total a pagar: <span className="text-orange-400">${total}</span>
           </div>
-          <button onClick={handlePurchase} className="mt-5 px-6 py-3 font-bold rounded-xl bg-orange-400 hover:bg-orange-600 transition duration-300 ease cursor-pointer">
+          <button
+            onClick={handlePurchase}
+            className="mt-5 px-6 py-3 font-bold rounded-xl bg-orange-400 hover:bg-orange-600 transition duration-300 ease cursor-pointer"
+          >
             Confirmar compra
           </button>
         </div>

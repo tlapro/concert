@@ -15,6 +15,7 @@ import { Rol } from 'src/common/roles.enum';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserTicket } from './entities/users-tickets.entity';
+import { UpdateUserPassword } from './dtos/UpdateUserPassword..dto';
 @Injectable()
 export class UsersService {
   constructor(
@@ -141,5 +142,69 @@ export class UsersService {
       where: { user: { id: userId } },
       relations: ['ticket', 'purchase'],
     });
+  }
+
+  comparePassword(password1: string, password2: string): boolean {
+    return password1 === password2;
+  }
+
+  async changePassword(
+    userUpdatePassword: UpdateUserPassword,
+    id: string,
+  ): Promise<{ message: string }> {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.startTransaction();
+    try {
+      const user = await queryRunner.manager.findOne(User, { where: { id } });
+
+      if (!user) {
+        throw new BadRequestException('No se encontró el usuario.');
+      }
+
+      const isPasswordCorrect = await bcrypt.compare(
+        userUpdatePassword.oldPassword,
+        user.password,
+      );
+      if (!isPasswordCorrect) {
+        throw new BadRequestException('La contraseña actual es incorrecta.');
+      }
+      const isOldPassword = await bcrypt.compare(
+        userUpdatePassword.newPassword,
+        user.password,
+      );
+      if (isOldPassword) {
+        throw new BadRequestException(
+          'La nueva contraseña no puede ser igual a la anterior.',
+        );
+      }
+      const isPasswordValid = this.comparePassword(
+        userUpdatePassword.newPassword,
+        userUpdatePassword.confirmPassword,
+      );
+      if (
+        userUpdatePassword.newPassword !== userUpdatePassword.confirmPassword
+      ) {
+        throw new BadRequestException(
+          'La nueva contraseña y su confirmación no coinciden',
+        );
+      }
+      const newPasswordHashed = await bcrypt.hash(
+        userUpdatePassword.newPassword,
+        10,
+      );
+      await queryRunner.manager.update(User, id, {
+        password: newPasswordHashed,
+      });
+
+      await queryRunner.commitTransaction();
+      return { message: 'Contraseña modificada con éxito.' };
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      throw new BadRequestException(
+        error.message || 'Ocurrió un error al cambiar la contraseña',
+      );
+    } finally {
+      await queryRunner.release();
+    }
   }
 }
