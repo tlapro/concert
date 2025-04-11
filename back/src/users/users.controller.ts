@@ -40,6 +40,15 @@ export class UsersController {
     return this.usersService.getAllTickets();
   }
 
+  @Put('delete-user')
+  @UseGuards(AuthGuard)
+  deleteUser(
+    @Body() body: { password: string },
+    @Req() req: AuthenticatedRequest,
+  ) {
+    const userId = req.user.id;
+    return this.usersService.deleteUser(userId, body.password);
+  }
   @Get(':id')
   // @Roles(Rol.Admin)
   // @UseGuards(AuthGuard, RoleGuard)

@@ -23,8 +23,12 @@ export default function AccountPage() {
             <Link href={"/account/password"}>
           <MenuButton icon={<RiLockPasswordLine size={24} />} label="Cambiar Contraseña" />
           </Link>
+          <Link href={"/account/support"}>
           <MenuButton icon={<BiSupport size={24} />} label="Soporte" />
+          </Link>
+          <Link href={"/account/delete"}>
           <MenuButton icon={<MdDeleteOutline size={24} />} label="Eliminar Cuenta" />
+          </Link>
         </div>
       </div>
     </div>

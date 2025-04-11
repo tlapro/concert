@@ -215,4 +215,42 @@ export class UsersService {
       await queryRunner.release();
     }
   }
+
+  async deleteUser(id: string, password: string) {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.startTransaction();
+
+    try {
+      const user = await this.usersRepository.findOne({ where: { id } });
+
+      if (!user || !user.isActive) {
+        throw new BadRequestException('Usuario no encontrado.');
+      }
+      console.log('password recibido:', password);
+      console.log('hash del usuario:', user.password);
+      const isPassword = await bcrypt.compare(password, user.password);
+
+      if (!isPassword) {
+        throw new BadRequestException('Contraseña incorrecta.');
+      }
+
+      const timestamp = Date.now();
+      const readableDate = new Date(timestamp).toISOString();
+      const newEmail = `${user.email}(/**deleted-${readableDate}**/)`;
+
+      await queryRunner.manager.update(User, id, {
+        isActive: false,
+        email: newEmail,
+      });
+      await queryRunner.commitTransaction();
+      return { message: 'Cuenta eliminada con éxito' };
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      throw new BadRequestException(
+        error.message || 'Error al eliminar el usuario.',
+      );
+    } finally {
+      await queryRunner.release();
+    }
+  }
 }

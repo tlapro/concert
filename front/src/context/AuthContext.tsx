@@ -98,7 +98,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return { success: true, message: `¡Registro exitoso!` };
 
     } catch (error: any) {
-      console.log(error)
       const errMsg = error?.response?.data?.message;
     
       const translatedErrors: Record<string, string> = {

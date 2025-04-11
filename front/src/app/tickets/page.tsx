@@ -3,8 +3,10 @@ import UserTicketCard from "@/components/UserTicketCard/UserTicketCard";
 import { useAuth } from "@/context/AuthContext";
 import { getUserTickets } from "@/helpers/getUserTickets";
 import { IUserTicket } from "@/interfaces/IUserTicket";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { IoArrowBackCircle } from "react-icons/io5";
 
 export default function Tickets() {
   const router = useRouter()
@@ -72,9 +74,24 @@ export default function Tickets() {
   const commonTickets = tickets.filter((t) => t.ticket.type === "common");
 
   return (
-    <div className="flex flex-col items-center p-6 min-h-screen mt-5">
+    <div
+    className="min-h-screen bg-cover bg-center bg-no-repeat"
+    style={{ backgroundImage: "url('/bg-pattern.png')" }}
+  >
+    <div className="flex flex-col p-6 min-h-screen mt-5">
+      <div className="flex items-start justify-start mb-6 w-[55%] mx-auto">
+          <Link href="/account">
+            <IoArrowBackCircle
+              size={28}
+              className="text-orange-400 hover:text-orange-300 transition"
+            />
+          </Link>
+          <h1 className="text-2xl font-bold text-white ml-4">Tus Entradas</h1>
+        </div>
+        <div className="flex flex-col items-center p-6 min-h-screen mt-5">
+
       {vipTickets.length > 0 && (
-        <div className="w-full max-w-5xl mb-8">
+        <div className="w-full max-w-5xl bg-neutral-900 p-4 border-2 border-neutral-700 rounded-2xl mb-10">
                     <hr className="border-[1px] border-neutral-800 w-full mb-10" />
           <h2 className="text-2xl text-purple-400 font-bold mb-4 text-center">
             Entradas VIP
@@ -90,7 +107,7 @@ export default function Tickets() {
       )}
 
       {commonTickets.length > 0 && (
-        <div className="w-full max-w-5xl">
+        <div className="w-full max-w-5xl bg-neutral-900 p-4 border-2 border-neutral-700 rounded-2xl">
           <h2 className="text-2xl text-orange-400 font-bold mb-4 mt-2 text-center">
             Entradas Comunes
           </h2>
@@ -103,6 +120,8 @@ export default function Tickets() {
           <hr className="border-[1px] border-neutral-800 w-full mt-5" />
         </div>
       )}
+      </div>
+    </div>
     </div>
   );
 }

@@ -4,10 +4,12 @@ import { useAuth } from "@/context/AuthContext";
 import { changePassword } from "@/helpers/changePassword";
 import { changePasswordValidation } from "@/helpers/changePasswordValidation";
 import { IChangePassword } from "@/interfaces/IChangePassword";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { IoArrowBackCircle } from "react-icons/io5";
 
 export default function ChangePassword() {
   const router = useRouter();
@@ -78,9 +80,15 @@ export default function ChangePassword() {
     >
       <div className="flex justify-center items-center">
         <div className="flex flex-col w-full max-w-sm bg-neutral-900 border border-neutral-800 rounded-2xl shadow-lg py-10 px-6 mt-40 mb-20">
-          <h2 className="text-2xl font-bold text-white text-center mb-4">
-            Cambiar contraseña
-          </h2>
+        <div className="flex items-center mb-6">
+          <Link href="/account">
+            <IoArrowBackCircle
+              size={28}
+              className="text-orange-400 hover:text-orange-300 transition"
+            />
+          </Link>
+          <h1 className="text-2xl font-bold text-white ml-4">Cambiar Contraseña</h1>
+        </div>
           <hr className="border border-neutral-800 w-full mb-4" />
           <div className="flex flex-col gap-4">
             <div className="relative">
