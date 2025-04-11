@@ -27,7 +27,9 @@ export default function AdminPage() {
             <Link href={"/admin/users"}>
               <MenuButton icon={<FaUsersCog size={24} />} label="Usuarios" />
             </Link>
+            <Link href={"/admin/purchases"}>
             <MenuButton icon={<BiPurchaseTag size={24} />} label="Compras" />
+            </Link>
           </div>
         </div>
       </div>

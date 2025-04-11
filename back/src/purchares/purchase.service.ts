@@ -22,6 +22,12 @@ export class PurchaseService {
     private readonly dataSource: DataSource,
   ) {}
 
+  async getAllPurchases() {
+    return this.purchasesRepository.find({
+      relations: ['user', 'ticket', 'purchaseTickets'],
+    });
+  }
+
   async createPurchase(
     userId: string,
     ticketsToBuy: { ticketId: string; quantity: number }[],
