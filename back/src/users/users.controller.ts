@@ -41,8 +41,8 @@ export class UsersController {
   }
 
   @Get(':id')
-  @Roles(Rol.Admin)
-  @UseGuards(AuthGuard, RoleGuard)
+  // @Roles(Rol.Admin)
+  // @UseGuards(AuthGuard, RoleGuard)
   getUserById(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.getUserById(id);
   }

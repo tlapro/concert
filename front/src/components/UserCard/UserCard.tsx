@@ -6,13 +6,9 @@ interface UserCardProps {
 }
 export default function UserCard({ user }: UserCardProps) {
     const router = useRouter();
-  const formatedBirthdate = new Date(user.birthdate)
-    .toISOString()
-    .split("T")[0];
-  const formatedCreatedAt = user.createdAt.split("T").join(" ");
 
   const handleDetails = () => {
-    router.push(`/users/${user.id}`);
+    router.push(`/admin/users/${user.id}`);
   };
 
   return (
@@ -28,18 +24,3 @@ export default function UserCard({ user }: UserCardProps) {
     </div>
   );
 }
-// {
-//     "id": "e2a91fd7-1bcf-4ec1-8bf1-ad3733cdfe33",
-//     "name": "Tomas",
-//     "email": "tester@gmail.com",
-//     "password": "$2b$10$XuYiNJsYDf5CvGbIp64Of.bT68X4rTomhNVifEJkHIVAeCUiLJH9W",
-//     "birthdate": "2000-04-20T03:00:00.000Z",
-//     "phone": "3777686085",
-//     "imgUser": "https://i.imgur.com/fEtaWXr.png",
-//     "role": {
-//         "id": 2,
-//         "name": "admin"
-//     },
-//     "isActive": true,
-//     "createdAt": "2025-04-09T21:05:45.970Z"
-// }

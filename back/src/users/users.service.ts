@@ -36,7 +36,10 @@ export class UsersService {
   }
   async getUserById(id: string) {
     try {
-      const user = await this.usersRepository.findOne({ where: { id } });
+      const user = await this.usersRepository.findOne({
+        where: { id },
+        relations: ['purchases'],
+      });
       if (!user) {
         throw new BadRequestException('User does not exist.');
       }
