@@ -28,6 +28,13 @@ export class PurchaseService {
     });
   }
 
+  async getPurchaseById(id: string) {
+    return this.purchasesRepository.findOne({
+      where: { id: id },
+      relations: ['user', 'ticket', 'purchaseTickets'],
+    });
+  }
+
   async createPurchase(
     userId: string,
     ticketsToBuy: { ticketId: string; quantity: number }[],

@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { PurchaseService } from './purchase.service';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { Roles } from 'src/decorators/roles.decorator';
@@ -15,6 +24,13 @@ export class PurchaseController {
   @UseGuards(AuthGuard, RoleGuard)
   getAllPurchases() {
     return this.purchaseService.getAllPurchases();
+  }
+
+  @Get(':id')
+  @Roles(Rol.Admin)
+  @UseGuards(AuthGuard, RoleGuard)
+  getPurchaseById(@Param('id', ParseUUIDPipe) id: string) {
+    return this.purchaseService.getPurchaseById(id);
   }
 
   @Post()
