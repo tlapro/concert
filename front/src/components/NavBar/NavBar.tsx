@@ -28,7 +28,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-neutral-900">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-neutral-900 shadow-xl">
       <div className="flex items-center justify-between h-16 px-6 relative">
         <div className="text-xl font-bold text-white">
           ARGENTINA <span className="text-orange-500">ROCK</span>
@@ -50,14 +50,14 @@ export default function NavBar() {
           {user ? (
             <div className="flex items-center gap-3">
               <Link href={"/account"}>
-                <div className="flex items-center gap-2 text-white bg-neutral-800 hover:bg-neutral-700 px-3 py-2 cursor-pointer rounded-xl transition duration-200 ease">
+                <div className="flex items-center gap-2 bg-neutral-800 hover:bg-neutral-700 px-3 py-2 cursor-pointer rounded-xl transition duration-200 ease">
                   <User size={20} />
                   <span className="text-sm">{user.name}</span>
                 </div>
               </Link>
               {user?.role?.name === "admin" && (
                 <Link href="/admin">
-                  <div className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm px-3 py-2 cursor-pointer rounded-xl transition duration-200 ease">
+                  <div className="flex items-center gap-2 bg-neutral-800 hover:bg-neutral-700 text-sm px-3 py-2 cursor-pointer rounded-xl transition duration-200 ease">
                     <Settings size={20}/> 
                     Panel de Control
                   </div>
