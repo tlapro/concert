@@ -37,7 +37,7 @@ export default function PurchaseTable({
         <td className="px-4 py-2">{new Date(purchase.purchase_date).toLocaleDateString("es-AR")}</td>
         <td className="px-4 py-2">
           <Link href={`/admin/compras/${purchase.id}`}>
-            <button className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 rounded transition text-sm cursor-pointer">
+            <button className="bg-orange-400 hover:bg-orange-500 text-white px-3 py-1 rounded transition text-sm cursor-pointer">
               Ver Detalle
             </button>
           </Link>
@@ -48,20 +48,26 @@ export default function PurchaseTable({
 </table>
 
 
-      <div className="flex justify-center mt-4 gap-2">
-        {[...Array(totalPages)].map((_, index) => (
-          <button
-            key={index}
-            className={`px-3 py-1 rounded ${
-              currentPage === index + 1
-                ? "bg-orange-500 text-white"
-                : "bg-neutral-700 text-gray-300 hover:bg-neutral-600"
-            }`}
-            onClick={() => onPageChange(index + 1)}
-          >
-            {index + 1}
-          </button>
-        ))}
+<div className="flex justify-center items-center gap-4 mt-4">
+        <button
+          onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
+          disabled={currentPage === 1}
+          className="px-3 py-1 rounded text-sm bg-neutral-700 text-gray-300 hover:bg-neutral-600 disabled:opacity-50 transition"
+        >
+          Anterior
+        </button>
+
+        <span className="text-sm text-gray-300">
+          Página {currentPage} de {totalPages}
+        </span>
+
+        <button
+          onClick={() => onPageChange(Math.min(currentPage + 1, totalPages))}
+          disabled={currentPage === totalPages}
+          className="px-3 py-1 rounded text-sm bg-neutral-700 text-gray-300 hover:bg-neutral-600 disabled:opacity-50 transition"
+        >
+          Siguiente
+        </button>
       </div>
     </div>
   );

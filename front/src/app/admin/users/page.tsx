@@ -39,12 +39,12 @@ export default function UsersPage() {
     fetchUsersData();
   }, [token]);
   return (
-    <div className="w-full max-w-4xl mx-auto mt-10 min-h-screen">
+    <div className="w-full max-w-[80%] mx-auto mt-10 min-h-screen">
       <div className="flex">
         <Link href={"/admin"}>
-      <IoArrowBackCircle size={30} className="mt-1"/>
+          <IoArrowBackCircle size={30} className="mt-1" />
         </Link>
-      <h1 className="text-3xl font-bold mb-8 ml-4">Usuarios</h1>
+        <h1 className="text-3xl font-bold mb-8 ml-4">Usuarios</h1>
       </div>
       <div className="relative w-full max-w-md mb-6 mx-auto">
         <CiSearch
@@ -73,23 +73,25 @@ export default function UsersPage() {
       {currentUsers.map((user) => (
         <UserCard key={user.id} user={user} />
       ))}
-      <div className="flex justify-center gap-2 mt-4">
+      <div className="flex justify-center items-center gap-4 mt-4">
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
-          className="px-3 py-1 bg-gray-700 text-white rounded disabled:opacity-50"
+          className="px-3 py-1 bg-neutral-700 text-gray-300 rounded hover:bg-neutral-600 disabled:opacity-50 transition"
         >
           Anterior
         </button>
-        <span className="text-white">
+
+        <span className="text-sm text-gray-300">
           Página {currentPage} de {totalPages}
         </span>
+
         <button
           onClick={() =>
             setCurrentPage((prev) => Math.min(prev + 1, totalPages))
           }
           disabled={currentPage === totalPages}
-          className="px-3 py-1 bg-gray-700 text-white rounded disabled:opacity-50"
+          className="px-3 py-1 bg-neutral-700 text-gray-300 rounded hover:bg-neutral-600 disabled:opacity-50 transition"
         >
           Siguiente
         </button>

@@ -17,7 +17,7 @@ export default function UserCard({ user }: UserCardProps) {
       <span>{user.email}</span>
       <button
         onClick={handleDetails}
-        className="bg-orange-400 hover:bg-orange-500 trnasition cursor-pointer text-white px-3 py-1 rounded"
+        className="w-[50%] bg-orange-400 hover:bg-orange-500 trnasition cursor-pointer text-white px-3 py-1 rounded"
       >
         Ver detalles
       </button>
