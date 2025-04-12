@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { TicketsModule } from './tickets/tickets.module';
 import { JwtModule } from '@nestjs/jwt';
 import { PurchaseModule } from './purchares/purchase.module';
+import { MercadoPagoModule } from './mercado-pago/mercado-pago.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { PurchaseModule } from './purchares/purchase.module';
     AuthModule,
     TicketsModule,
     PurchaseModule,
+    MercadoPagoModule,
     JwtModule.register({
       global: true,
       signOptions: { expiresIn: '1h' },
