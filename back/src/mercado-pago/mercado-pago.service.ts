@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Injectable } from '@nestjs/common';
 import { mpClient } from '../config/mercadopago';
 import { Preference } from 'mercadopago/dist/clients/preference';
