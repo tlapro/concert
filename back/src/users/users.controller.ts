@@ -20,8 +20,8 @@ import { UpdateUserPassword } from './dtos/UpdateUserPassword..dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   @Get()
-  @Roles(Rol.Admin)
-  @UseGuards(AuthGuard, RoleGuard)
+  // @Roles(Rol.Admin)
+  // @UseGuards(AuthGuard, RoleGuard)
   getUsers() {
     return this.usersService.getUsers();
   }

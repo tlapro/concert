@@ -15,5 +15,6 @@ import { PurchaseController } from './purchase.controller';
   ],
   providers: [PurchaseService],
   controllers: [PurchaseController],
+  exports: [PurchaseService],
 })
 export class PurchaseModule {}

@@ -45,7 +45,7 @@ export class PurchaseService {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
-
+    console.log(ticketsToBuy);
     try {
       const purchase = this.purchasesRepository.create({
         user,
@@ -61,6 +61,10 @@ export class PurchaseService {
       await queryRunner.manager.save(purchase);
 
       for (const item of ticketsToBuy) {
+        console.log(
+          `Procesando ticket con ID: ${item.ticketId} y cantidad: ${item.quantity}`,
+        );
+
         const ticket = await queryRunner.manager.findOne(Ticket, {
           where: { id: item.ticketId, state: true },
         });
@@ -70,6 +74,8 @@ export class PurchaseService {
             `Ticket ${item.ticketId} no encontrado o inactivo`,
           );
 
+        console.log(`Tipo de ticket: ${ticket.type}`);
+
         const purchaseTicket = this.purchasesTicketsRepository.create({
           purchase,
           ticket,
@@ -77,8 +83,13 @@ export class PurchaseService {
         });
         await queryRunner.manager.save(purchaseTicket);
 
-        if (ticket.type === 'common') totalCommon += item.quantity;
-        if (ticket.type === 'vip') totalVip += item.quantity;
+        if (ticket.type === 'common') {
+          totalCommon += item.quantity;
+        } else if (ticket.type === 'vip') {
+          totalVip += item.quantity;
+        } else {
+          console.error(`Tipo de ticket desconocido: ${ticket.type}`);
+        }
 
         for (let i = 0; i < item.quantity; i++) {
           const userTicket = this.userTicketsRepository.create({
