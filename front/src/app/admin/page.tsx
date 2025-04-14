@@ -10,7 +10,7 @@ export default function AdminPage() {
     <div
       className="min-h-screen bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: "url('/bg-pattern.png')" }}
-    >
+      >
       <div className="flex justify-center items-center">
         <div className="flex flex-col items-center w-[90%] md:w-full max-w-sm bg-neutral-900 border border-neutral-800 rounded-2xl shadow-lg py-10 px-6 mt-20 md:mt-40">
           <h2 className="text-2xl font-bold mb-6 text-white">
