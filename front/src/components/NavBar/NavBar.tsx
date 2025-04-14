@@ -58,7 +58,7 @@ export default function NavBar() {
               {user?.role?.name === "admin" && (
                 <Link href="/admin">
                   <div className="flex items-center gap-2 bg-neutral-800 hover:bg-neutral-700 text-sm px-3 py-2 cursor-pointer rounded-xl transition duration-200 ease">
-                    <Settings size={20}/> 
+                    <Settings size={20} />
                     Panel de Control
                   </div>
                 </Link>
@@ -111,16 +111,19 @@ export default function NavBar() {
           <div className="border-t border-neutral-700 pt-4 space-y-3">
             {user ? (
               <div className="flex flex-col gap-2">
-                <Link href={"/account"} onClick={() => setMobileMenuOpen(false)}>
-                <div className="flex gap-2 justify-center bg-neutral-800 hover:bg-neutral-700 px-3 py-2 cursor-pointer rounded-xl transition">
+                <Link
+                  href={"/account"}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <div className="flex gap-2 justify-center bg-neutral-800 hover:bg-neutral-700 px-3 py-2 cursor-pointer rounded-xl transition">
                     <User size={20} />
                     <span className="text-sm">{user.name}</span>
                   </div>
                 </Link>
                 {user?.role?.name === "admin" && (
                   <Link href="/admin" onClick={() => setMobileMenuOpen(false)}>
-                    <div className="flex gap-2 justify-center bg-red-600 hover:bg-red-700 text-white text-sm px-3 py-2 rounded-xl transition">
-                    <Settings size={20} />
+                    <div className="flex gap-2 justify-center bg-neutral-800 hover:bg-neutral-700 text-white text-sm px-3 py-2 rounded-xl transition">
+                      <Settings size={20} />
                       Panel de Control
                     </div>
                   </Link>
@@ -136,17 +139,17 @@ export default function NavBar() {
                 </button>
               </div>
             ) : (
-              <div className="flex flex-col gap-2">
+              <div className="flex justify-center gap-2">
                 <Link
                   href="/auth/signin"
-                  className="hover:text-orange-400 transition"
+                  className="bg-neutral-800 hover:bg-neutral-700 text-white px-3 py-2 rounded-xl transition text-center"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Iniciar Sesión
                 </Link>
                 <Link
                   href="/auth/signup"
-                  className="bg-orange-400 hover:bg-orange-500 text-white px-3 py-2 rounded-xl transition"
+                  className="w-[50%] bg-orange-400 hover:bg-orange-500 text-white px-3 py-2 rounded-xl transition text-center"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Registrarse

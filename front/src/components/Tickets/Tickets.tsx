@@ -149,7 +149,7 @@ export default function Tickets() {
         )}
       </div>
       {selectedTickets.length > 0 && (
-        <div className="flex flex-col w-[20%] justify-center items-center mx-auto mt-10 text-white text-lg font-semibold text-center">
+        <div className="flex flex-col w-[90%] md:w-[20%] justify-center items-center mx-auto mt-10 text-white text-lg font-semibold text-center">
           <div>
             Total a pagar: <span className="text-orange-400">${total}</span>
           </div>
