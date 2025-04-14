@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { createMercadoPagoPreference } from "@/helpers/createMercadoPagoPreference";
 import { FaCreditCard } from "react-icons/fa";
 import Image from "next/image";
+import { purchaseTickets } from "@/helpers/purchaseTickets";
 
 export default function Tickets() {
   const router = useRouter();
@@ -40,6 +41,19 @@ export default function Tickets() {
     fetchTickets();
   }, [token]);
 
+  const handlePurchaseCommon = async () => {
+    if (!user || !token) return;
+    try {
+      const res = await purchaseTickets({  userId: user.id,
+        tickets: selectedTickets,
+        token,
+      });
+      toast.success("Compra realizada con exito");
+      router.push("/tickets")
+    } catch (err) {
+      toast.error("Error al comprar las entradas");
+  }
+}
   const handlePurchase = async () => {
     if (!user || !token) return;
     try {
@@ -105,7 +119,7 @@ export default function Tickets() {
           <IoTicketOutline size={40} className="ml-5 rotate-90" />
         </h1>
       </div>
-      <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+      <div className="flex flex-col md:flex-row w-[90%] mx-auto justify-center items-center gap-4">
         {tickets.length > 0 ? (
           tickets.map((ticket) => (
             <TicketCard
@@ -151,6 +165,10 @@ export default function Tickets() {
             />
             Pagar con Mercado Pago
           </button>
+          <button
+             onClick={handlePurchaseCommon}
+             className="mt-5 w-full px-6 py-3 font-bold rounded-xl bg-orange-400 hover:bg-orange-600 transition duration-300 ease cursor-pointer"
+           >Confirmar Compra </button>
         </div>
       )}
     </div>

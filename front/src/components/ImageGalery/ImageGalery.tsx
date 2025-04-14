@@ -44,8 +44,10 @@ export default function ImageGalery() {
 
   return (
     <div>
-      <h1 className="text-center font-bold text-4xl p-4 border-b-4 border-neutral-900 w-[10%] mx-auto mb-10">Galería</h1>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-[50%] mx-auto">
+      <h1 className="text-center font-bold text-4xl p-4 border-b-4 border-neutral-900 w-[90%] md:w-[10%] mx-auto mb-10">
+        Galería
+      </h1>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4 w-[90%] md:w-[60%] mx-auto">
         {images.map((src, index) => (
           <div
             key={index}
@@ -67,13 +69,21 @@ export default function ImageGalery() {
           className="fixed inset-0 bg-transparent backdrop-blur-md flex justify-center items-center z-50"
           onClick={() => setSelectedImage(null)}
         >
-          <Image
-            src={images[selectedImage]}
-            alt="Ampliada"
-            className="max-w-4xl max-h-[80vh] rounded-lg shadow-lg"
-            width={1000}
-            height={1000}
-          />
+          <div className="relative">
+            <button
+              className="absolute top-4 right-4 text-white text-3xl font-bold hover:text-red-600 transition-colors"
+              onClick={() => setSelectedImage(null)}
+            >
+              &times;
+            </button>
+            <Image
+              src={images[selectedImage]}
+              alt="Ampliada"
+              className="max-w-4xl max-h-[80vh] rounded-lg shadow-lg"
+              width={1000}
+              height={1000}
+            />
+          </div>
         </div>
       )}
     </div>

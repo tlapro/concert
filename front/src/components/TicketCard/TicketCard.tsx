@@ -28,7 +28,7 @@ export default function TicketCard({ ticket, onQuantityChange }: Props) {
   };
 
   return (
-    <div className="w-full max-w-md p-4 bg-neutral-900 text-white border border-orange-500 shadow-md rounded-2xl mb-6">
+    <div className="w-full max-w-md p-4 bg-neutral-900 text-white border border-neutral-700 hover:border-orange-500 transition cursor-default shadow-md rounded-2xl mb-6">
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">
