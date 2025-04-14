@@ -31,7 +31,7 @@ export default function SupportPage() {
         <div className="space-y-4">
           <SupportItem
             label="Correo Electrónico"
-            value="soporte@tusentradas.com"
+            value="mail@soporte.com"
             icon={MdEmail}
           />
           <SupportItem
@@ -69,7 +69,7 @@ function SupportItem({
       <Icon size={24} className="text-orange-400" />
       <div>
         <p className="text-sm text-gray-400">{label}</p>
-        <p className="text-lg font-medium text-white">{value}</p>
+        <p className="text-md md:text-lg font-medium text-white">{value}</p>
       </div>
     </div>
   );

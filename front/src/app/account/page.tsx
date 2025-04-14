@@ -13,7 +13,7 @@ export default function AccountPage() {
   style={{ backgroundImage: "url('/bg-pattern.png')" }}
 >
     <div className="flex justify-center items-center">
-      <div className="flex flex-col items-center w-full max-w-sm bg-neutral-900 border border-neutral-800 rounded-2xl shadow-lg py-10 px-6 mt-40">
+      <div className="flex flex-col items-center  w-[90%] md:w-full max-w-sm bg-neutral-900 border border-neutral-800 rounded-2xl shadow-lg py-10 px-6 mt-20 md:mt-40">
         <h2 className="text-3xl font-bold mb-6 text-white">Menú de usuario</h2>
         <hr className="border border-neutral-800 w-full mb-8" />
         <div className="flex flex-col gap-4 w-full">
