@@ -8,9 +8,11 @@ import { useEffect, useState } from "react";
 import { IoTicketOutline } from "react-icons/io5";
 import TicketCard from "../TicketCard/TicketCard";
 import { SelectedTicket } from "@/interfaces/ISelectedTicket";
-import { purchaseTickets } from "@/helpers/purchaseTickets";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { createMercadoPagoPreference } from "@/helpers/createMercadoPagoPreference";
+import { FaCreditCard } from "react-icons/fa";
+import Image from "next/image";
 
 export default function Tickets() {
   const router = useRouter();
@@ -39,18 +41,22 @@ export default function Tickets() {
   }, [token]);
 
   const handlePurchase = async () => {
-    if (!user) return;
-    if (!token) return;
+    if (!user || !token) return;
     try {
-      const res = await purchaseTickets({
+      const res = await createMercadoPagoPreference({
         userId: user.id,
         tickets: selectedTickets,
         token,
       });
-      toast.success("Compra realizada con exito");
-      router.push("/tickets")
+
+      if (res?.init_point) {
+        window.location.href = res.init_point;
+      } else {
+        toast.error("No se pudo redirigir a Mercado Pago");
+      }
     } catch (err) {
-      toast.error("Error al comprar las entradas");
+      toast.error("Error al iniciar el pago con Mercado Pago");
+      console.error(err);
     }
   };
 
@@ -135,9 +141,15 @@ export default function Tickets() {
           </div>
           <button
             onClick={handlePurchase}
-            className="mt-5 px-6 py-3 font-bold rounded-xl bg-orange-400 hover:bg-orange-600 transition duration-300 ease cursor-pointer"
+            className="mt-5 w-full px-6 py-3 font-bold rounded-xl bg-[#0070ba] text-white hover:bg-[#0062a1] transition duration-300 ease cursor-pointer flex items-center justify-center gap-2"
           >
-            Confirmar compra
+            <Image
+              src="/mercadopago-logo.svg"
+              alt="Mercado Pago"
+              width={32}
+              height={32}
+            />
+            Pagar con Mercado Pago
           </button>
         </div>
       )}

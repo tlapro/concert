@@ -26,7 +26,7 @@ export class MercadoPagoService {
         },
       ],
       back_urls: {
-        success: `${process.env.API_URL}/payment/success`,
+        success: `${process.env.FRONTEND_URL}/payment/success`,
         failure: `${process.env.FRONTEND_URL}/payment/failure`,
         pending: `${process.env.FRONTEND_URL}/payment/pending`,
       },
