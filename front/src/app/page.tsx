@@ -34,7 +34,7 @@ export default function Home() {
           <div className="absolute top-0 left-0 w-full h-full bg-blue-500 opacity-40"></div>
 
           <div className="absolute top-1/2 left-1/2 xl:left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-white text-center px-4">
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+            <h1 className="text-5xl sm:text-5xl lg:text-6xl font-bold leading-tight">
               Rock Nacional & Festival
             </h1>
             <div className="flex justify-center xl:justify-start mt-4">

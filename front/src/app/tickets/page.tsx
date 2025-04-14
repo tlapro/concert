@@ -49,14 +49,21 @@ export default function Tickets() {
 
   if (isLoading) {
     return (
-      <div className="text-center text-white mt-10">Cargando entradas...</div>
+      <div className="flex justify-center items-center h-screen bg-gray-800">
+      <div className="flex flex-col items-center space-y-4">
+        <div className="w-12 h-12 border-4 border-orange-400 border-dashed rounded-full animate-spin"></div>
+        <p className="text-gray-200 font-medium">Cargando entradas...</p>
+      </div>
+    </div>
     );
   }
 
   if (!token) {
     return (
-      <div className="flex justify-center items-center text-white mt-10">
-        Debes ingresar a tu cuenta para ver tus entradas.
+      <div className="flex justify-center items-center h-screen bg-gray-800">
+        <div className="flex flex-col items-center space-y-4">
+          <p className="text-gray-200 font-medium">Debes ingresar a tu cuenta para ver tus entradas.</p>
+        </div>
       </div>
     );
   }

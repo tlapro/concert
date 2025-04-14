@@ -6,22 +6,21 @@ import toast from "react-hot-toast";
 import { useAuth } from "@/context/AuthContext";
 
 const IsAdmin = ({ children }: { children: React.ReactNode }) => {
-
   const { user, token } = useAuth();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const hasShownToastRef = useRef(false);
 
   useEffect(() => {
-    if (!user || !token) {
-        router.replace("/");
-        if (!hasShownToastRef.current) {
-          toast.error("Debes estar logueado para acceder a esta página.");
-          hasShownToastRef.current = true;
-        }
-      } else {
-        setIsLoading(false);
+    if (user?.role.name !== "admin" || user?.role === null || !user.role || !token) {
+      router.replace("/");
+      if (!hasShownToastRef.current) {
+        toast.error("Debes ser administrador para acceder a esta página.");
+        hasShownToastRef.current = true;
       }
+    } else {
+      setIsLoading(false);
+    }
   }, [user, token, router]);
 
   if (isLoading) {
