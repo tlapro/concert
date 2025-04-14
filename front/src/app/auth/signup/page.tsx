@@ -92,143 +92,146 @@ export default function SignUp() {
   };
 
   return (
-    <div className="w-full h-full flex justify-center items-center">
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col items-center bg-neutral-900 max-h-[90%] w-[90%] md:w-[80%] lg:w-[60%] rounded-2xl p-10 shadow-lg space-y-6"
-      >
-        <h2 className="text-3xl font-semibold text-center text-white">
-          Registrarse
-        </h2>
-        <hr className="border-[1px] border-neutral-800 w-full" />
+<div className="w-full h-screen bg-neutral-950 flex justify-center items-start md:items-center p-4 md:p-10 pb-40 md:pb-0 overflow-y-auto">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-          <div className="space-y-4">
-            <div className="flex flex-col text-left gap-1">
-              <label htmlFor="name" className="text-white text-sm font-medium">
-                Nombre
-              </label>
-              <input
-                name="name"
-                className="w-full bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                onChange={handleChange}
-                placeholder="Nombre completo"
-              />
-              {errors.name && (
-                <p className="text-red-500 text-xs">{errors.name}</p>
-              )}
-            </div>
+  <form
+    onSubmit={handleSubmit}
+    className="flex flex-col bg-neutral-900 w-full max-w-xl rounded-2xl p-6 md:p-10 shadow-lg space-y-6"
+  >
+    <h2 className="text-3xl font-semibold text-center text-white">
+      Registrarse
+    </h2>
+    <hr className="border border-neutral-800 w-full" />
 
-            <div className="flex flex-col text-left gap-1">
-              <label htmlFor="email" className="text-white text-sm font-medium">
-                Email
-              </label>
-              <input
-                name="email"
-                type="email"
-                className="w-full bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                onChange={handleChange}
-                placeholder="Email"
-              />
-              {errors.email && (
-                <p className="text-red-500 text-xs">{errors.email}</p>
-              )}
-            </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full">
+      {/* Primera columna */}
+      <div className="space-y-4">
 
-            <div className="flex flex-col text-left gap-1">
-              <label htmlFor="phone" className="text-white text-sm font-medium">
-                Teléfono
-              </label>
-              <input
-                name="phone"
-                className="w-full bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                onChange={handleChange}
-                placeholder="Teléfono"
-              />
-              {errors.phone && (
-                <p className="text-red-500 text-xs">{errors.phone}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <div className="flex flex-col text-left gap-1">
-              <label
-                htmlFor="birthdate"
-                className="text-white text-sm font-medium"
-              >
-                Fecha de Nacimiento
-              </label>
-              <input
-                type="date"
-                name="birthdate"
-                max={new Date().toISOString().split("T")[0]}
-                className="w-full bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                onChange={handleChange}
-              />
-              {errors.birthdate && (
-                <p className="text-red-500 text-xs">{errors.birthdate}</p>
-              )}
-            </div>
-
-            <div className="flex flex-col text-left gap-1">
-              <label
-                htmlFor="password"
-                className="text-white text-sm font-medium"
-              >
-                Contraseña
-              </label>
-              <input
-                name="password"
-                type="password"
-                className="w-full bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                onChange={handleChange}
-                placeholder="Contraseña"
-              />
-              {errors.password && (
-                <p className="text-red-500 text-xs">{errors.password}</p>
-              )}
-            </div>
-
-            <div className="flex flex-col text-left gap-1">
-              <label
-                htmlFor="confirmPassword"
-                className="text-white text-sm font-medium"
-              >
-                Repetir Contraseña
-              </label>
-              <input
-                name="confirmPassword"
-                type="password"
-                className="w-full bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                onChange={handleChange}
-                placeholder="Repetir Contraseña"
-              />
-              {errors.confirmPassword && (
-                <p className="text-red-500 text-xs">{errors.confirmPassword}</p>
-              )}
-            </div>
-          </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="name" className="text-white text-sm font-medium">
+            Nombre
+          </label>
+          <input
+            name="name"
+            className="bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            onChange={handleChange}
+            placeholder="Nombre completo"
+          />
+          {errors.name && (
+            <p className="text-red-500 text-xs">{errors.name}</p>
+          )}
         </div>
 
-        <div className="flex flex-col items-center gap-4">
-          <button
-            type="submit"
-            className="bg-orange-400 hover:bg-orange-500 cursor-pointer text-white px-6 py-2 rounded-md transition duration-300"
+
+        <div className="flex flex-col gap-1">
+          <label htmlFor="email" className="text-white text-sm font-medium">
+            Email
+          </label>
+          <input
+            name="email"
+            type="email"
+            className="bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            onChange={handleChange}
+            placeholder="Email"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-xs">{errors.email}</p>
+          )}
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <label htmlFor="phone" className="text-white text-sm font-medium">
+            Teléfono
+          </label>
+          <input
+            name="phone"
+            className="bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            onChange={handleChange}
+            placeholder="Teléfono"
+          />
+          {errors.phone && (
+            <p className="text-red-500 text-xs">{errors.phone}</p>
+          )}
+        </div>
+      </div>
+
+      {/* Segunda columna */}
+      <div className="space-y-4">
+
+        <div className="flex flex-col gap-1">
+          <label htmlFor="birthdate" className="text-white text-sm font-medium">
+            Fecha de Nacimiento
+          </label>
+          <input
+            type="date"
+            name="birthdate"
+            max={new Date().toISOString().split("T")[0]}
+            className="bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            onChange={handleChange}
+          />
+          {errors.birthdate && (
+            <p className="text-red-500 text-xs">{errors.birthdate}</p>
+          )}
+        </div>
+
+
+        <div className="flex flex-col gap-1">
+          <label htmlFor="password" className="text-white text-sm font-medium">
+            Contraseña
+          </label>
+          <input
+            name="password"
+            type="password"
+            className="bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            onChange={handleChange}
+            placeholder="Contraseña"
+          />
+          {errors.password && (
+            <p className="text-red-500 text-xs">{errors.password}</p>
+          )}
+        </div>
+
+
+        <div className="flex flex-col gap-1">
+          <label
+            htmlFor="confirmPassword"
+            className="text-white text-sm font-medium"
           >
-            Registrarme
-          </button>
-          <p className="text-sm text-white">
-            ¿Ya tienes una cuenta?{" "}
-            <Link
-              href={"/auth/signin"}
-              className="text-orange-400 hover:text-orange-500 transition duration-200"
-            >
-              Inicia sesión
-            </Link>
-          </p>
+            Repetir Contraseña
+          </label>
+          <input
+            name="confirmPassword"
+            type="password"
+            className="bg-neutral-800 text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            onChange={handleChange}
+            placeholder="Repetir Contraseña"
+          />
+          {errors.confirmPassword && (
+            <p className="text-red-500 text-xs">{errors.confirmPassword}</p>
+          )}
         </div>
-      </form>
+      </div>
     </div>
+
+    <div className="flex flex-col items-center gap-4 pt-4">
+      <button
+        type="submit"
+        className="bg-orange-400 hover:bg-orange-500 text-white px-6 py-2 rounded-md transition duration-300 w-full md:w-auto"
+      >
+        Registrarme
+      </button>
+      <p className="text-sm text-white text-center">
+        ¿Ya tienes una cuenta?{" "}
+        <Link
+          href={"/auth/signin"}
+          className="text-orange-400 hover:text-orange-500 transition duration-200"
+        >
+          Inicia sesión
+        </Link>
+      </p>
+    </div>
+  </form>
+</div>
+
   );
 }

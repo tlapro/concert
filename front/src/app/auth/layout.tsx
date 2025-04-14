@@ -1,17 +1,18 @@
-"use client"
+"use client";
 import Image from "next/image";
 import { useEffect } from "react";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
-    useEffect(() => {
-        document.body.style.overflow = "hidden";
-        return () => {
-          document.body.style.overflow = "auto";
-        };
-      }, []);
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen flex overflow-hidden">
-      <div className="w-1/2 relative">
+    <div className="min-h-screen flex flex-col md:flex-row overflow-hidden">  
+      <div className="hidden md:block md:w-1/2 relative">
         <Image
           src="/ArgentinaRock.png"
           alt="Argentina Rock"
@@ -20,7 +21,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         />
       </div>
 
-      <div className="w-1/2 flex items-center justify-center">
+      <div className="w-full md:w-1/2 flex items-center justify-center p-4">
         {children}
       </div>
     </div>
