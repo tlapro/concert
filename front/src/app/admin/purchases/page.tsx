@@ -46,7 +46,7 @@ export default function PurchasesPage() {
         <Link href={"/admin"}>
           <IoArrowBackCircle size={30} className="mt-1" />
         </Link>
-        <h1 className="text-3xl font-bold mb-8 ml-4">Compras de Usuarios</h1>
+        <h1 className="md:text-3xl font-bold mb-8 ml-4">Compras de Usuarios</h1>
       </div>
       <div className="relative w-full max-w-md mb-6 mx-auto">
               <CiSearch

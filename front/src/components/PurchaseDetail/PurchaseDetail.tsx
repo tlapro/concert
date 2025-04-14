@@ -9,22 +9,24 @@ interface Props {
 
 export default function PurchaseDetail({ purchase }: Props) {
   return (
-    <div className="w-full max-w-[80%] mx-auto mt-10 min-h-screen">
-      <div className="flex">
-        <Link href={"/admin/purchases"}>
-          <IoArrowBackCircle size={30} className="mt-1" />
+    <div className="w-full max-w-4xl px-4 mx-auto mt-10 min-h-screen">
+      <div className="flex items-center mb-6">
+        <Link href="/admin/purchases">
+          <IoArrowBackCircle size={30} className="text-white" />
         </Link>
-        <h1 className="text-3xl font-bold mb-4 ml-4">Detalle de Compra</h1>
+        <h1 className="text-3xl font-bold ml-4 text-white">
+          Detalle de Compra
+        </h1>
       </div>
-      <div className="bg-neutral-900 p-8 rounded-xl shadow-lg text-white max-w-2xl mx-auto mt-10 border border-neutral-700">
+
+      <div className="bg-neutral-900 p-4 sm:p-8 rounded-xl shadow-lg text-white border border-neutral-700">
         <h2 className="text-2xl text-center font-bold mb-2 text-orange-400 border-b border-gray-600 pb-2">
           Compra de {purchase.user.name}
         </h2>
-        <div className="text-center text-neutral-500">
-            <p  className="text-center text-neutral-500"> ID: #{purchase.id} </p>
-          </div>
 
-        <div className="grid grid-cols-1 gap-4 text-sm mt-4">
+        <p className="text-center text-neutral-500 text-sm">ID: #{purchase.id}</p>
+
+        <div className="grid grid-cols-1 gap-4 text-sm mt-6">
           <div>
             <strong className="text-orange-400">Nombre:</strong>{" "}
             {purchase.user.name}
@@ -46,10 +48,10 @@ export default function PurchaseDetail({ purchase }: Props) {
           <div>
             <strong className="text-orange-400">Hora de compra:</strong>{" "}
             {new Date(purchase.purchase_date).toLocaleTimeString("es-AR", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  hour12: true,
-                })}
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            })}
           </div>
         </div>
 
@@ -60,7 +62,7 @@ export default function PurchaseDetail({ purchase }: Props) {
             </h3>
             <ul className="space-y-3">
               {purchase.quantity_common > 0 && (
-                <li className="bg-neutral-800 rounded-lg p-4 border border-gray-700 flex items-center justify-between">
+                <li className="bg-neutral-800 rounded-lg p-4 border border-gray-700 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                   <div>
                     <p className="text-sm">
                       <strong className="text-orange-400">Tipo de entrada:</strong> Común
@@ -70,11 +72,11 @@ export default function PurchaseDetail({ purchase }: Props) {
                       {purchase.quantity_common}
                     </p>
                   </div>
-                  <Ticket className="text-orange-400 w-6 h-6" />
+                  <Ticket className="text-orange-400 w-6 h-6 self-end sm:self-auto" />
                 </li>
               )}
               {purchase.quantity_vip > 0 && (
-                <li className="bg-neutral-800 rounded-lg p-4 border border-gray-700 flex items-center justify-between">
+                <li className="bg-neutral-800 rounded-lg p-4 border border-gray-700 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                   <div>
                     <p className="text-sm">
                       <strong className="text-orange-400">Tipo de entrada:</strong> VIP
@@ -84,7 +86,7 @@ export default function PurchaseDetail({ purchase }: Props) {
                       {purchase.quantity_vip}
                     </p>
                   </div>
-                  <Ticket className="text-violet-400 w-6 h-6" />
+                  <Ticket className="text-violet-400 w-6 h-6 self-end sm:self-auto" />
                 </li>
               )}
             </ul>
