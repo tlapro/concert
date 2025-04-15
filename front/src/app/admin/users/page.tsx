@@ -64,11 +64,13 @@ export default function UsersPage() {
     />
   </div>
 
-  <div className="hidden md:grid grid-cols-3 gap-4 px-4 py-2 border-b border-gray-600 text-white font-semibold">
-    <span>Nombre</span>
-    <span>Email</span>
-    <span>Acciones</span>
-  </div>
+  <div className="hidden md:grid grid-cols-4 gap-4 px-4 py-2 border-b border-gray-600 text-white font-semibold">
+  <span>Nombre</span>
+  <span>Email</span>
+  <span>Estado</span>
+  <span>Acciones</span>
+</div>
+
 
   {currentUsers.map((user) => (
     <UserCard key={user.id} user={user} />

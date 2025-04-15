@@ -40,6 +40,7 @@ export default function PurchasesPage() {
     fetchUsersData();
   }, [token]);
 
+
   return (
     <div className="w-[80%] mx-auto p-6">
       <div className="flex">

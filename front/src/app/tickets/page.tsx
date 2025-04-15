@@ -109,7 +109,7 @@ export default function Tickets() {
                 Entradas VIP
               </h2>
               <hr className="border-[1px] border-neutral-800 w-full mt-10 mb-5" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 place-items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 place-items-center">
                 {vipTickets.map((ticket) => (
                   <UserTicketCard key={ticket.id} userTicket={ticket} />
                 ))}
@@ -124,7 +124,7 @@ export default function Tickets() {
                 Entradas Comunes
               </h2>
               <hr className="border-[1px] border-neutral-800 w-full mt-10 mb-5" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 place-items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 place-items-center">
                 {commonTickets.map((ticket) => (
                   <UserTicketCard key={ticket.id} userTicket={ticket} />
                 ))}

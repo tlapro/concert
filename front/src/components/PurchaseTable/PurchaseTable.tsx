@@ -14,6 +14,12 @@ export default function PurchaseTable({
   totalPages,
   onPageChange,
 }: Props) {
+  function formatEmail(email: string, isActive: boolean): string {
+    if (!isActive || email.includes("(**deleted-")) {
+      return `${email.split("(/")[0]} | Usuario Eliminado`;
+    }
+    return email.split("(**deleted-")[0];
+  }
   return (
     <div className="w-full overflow-x-auto">
       <table className="w-full table-auto hidden md:table">
@@ -35,8 +41,16 @@ export default function PurchaseTable({
               className="border-b border-neutral-700 text-sm text-white"
             >
               <td className="px-4 py-2">{purchase.user.name}</td>
-              <td className="px-4 py-2 truncate">{purchase.user.email}</td>
-              <td className="px-4 py-2 text-center">{purchase.quantity_common}</td>
+              <td
+                className={`px-4 py-2 truncate ${
+                  !purchase.user.isActive ? "text-red-400 italic" : ""
+                }`}
+              >
+                {formatEmail(purchase.user.email, purchase.user.isActive)}
+              </td>
+              <td className="px-4 py-2 text-center">
+                {purchase.quantity_common}
+              </td>
               <td className="px-4 py-2 text-center">{purchase.quantity_vip}</td>
               <td className="px-4 py-2 text-center">
                 {new Date(purchase.purchase_date).toLocaleDateString("es-AR")}

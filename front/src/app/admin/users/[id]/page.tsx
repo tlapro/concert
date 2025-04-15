@@ -15,6 +15,13 @@ export default function UserDetail() {
 
   const [userData, setUserData] = useState<IUserDetail | null>(null);
 
+  function formatEmail(email: string, isActive: boolean): string {
+    if (!isActive || email.includes("(**deleted-")) {
+      return email.split("(/**")[0];
+    }
+    return email.split("(**deleted-")[0];
+  }
+
   useEffect(() => {
     const fetchUserData = async () => {
       if (!token) return;
@@ -28,7 +35,7 @@ export default function UserDetail() {
   if (!userData) {
     return <div className="text-white p-6">Cargando datos del usuario...</div>;
   }
-
+  const formattedEmail = formatEmail(userData.email, userData.isActive);
   const formattedBirthdate = new Date(userData.birthdate).toLocaleDateString();
   const formattedCreatedAt = new Date(userData.createdAt).toLocaleDateString();
 
@@ -49,7 +56,7 @@ export default function UserDetail() {
             <span className="text-orange-400 font-medium">Nombre:</span> {userData.name}
           </p>
           <p className="grid grid-cols-1 sm:grid-cols-2 w-[80%] justify-around">
-            <span className="text-orange-400 font-medium">Email:</span> {userData.email}
+            <span className="text-orange-400 font-medium">Email:</span> {formattedEmail}
           </p>
           <p className="grid grid-cols-1 sm:grid-cols-2 w-[80%] justify-around">
             <span className="text-orange-400 font-medium">Teléfono:</span> {userData.phone}
@@ -64,7 +71,7 @@ export default function UserDetail() {
           </p>
           <p className="grid grid-cols-1 sm:grid-cols-2 w-[80%] justify-around">
             <span className="text-orange-400 font-medium">Estado:</span>{" "}
-            {userData.isActive ? "Activo" : "Inactivo"}
+            <span className={userData.isActive ? "text-green-500" : "text-red-500"}>{userData.isActive ? "Activo" : "Inactivo"}</span>
           </p>
         </div>
       </div>

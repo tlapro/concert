@@ -83,7 +83,7 @@ export default function SignInPage() {
       <div className="flex flex-col items-center gap-4">
         <button
           type="submit"
-          className="bg-orange-400 px-6 py-2 rounded-md text-white"
+          className="bg-orange-400 hover:bg-orange-500 transition px-6 py-2 rounded-md text-white cursor-pointer"
         >
           Iniciar Sesión
         </button>
